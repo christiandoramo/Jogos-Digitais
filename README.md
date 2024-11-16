@@ -4,9 +4,9 @@ Projeto baseado nos desafios da disciplina Jogos Digitais 2024.2 UFRPE
 
 ## Desafio 1
 
-(50 pontos) Movimentação de objetos na tela (2D ou 3D) a partir de um comando do usuário (input) e realizando colisões com outros objetos.
-(70 pontos) Apresentar alguma animação do personagem, ex: animação ao andar ou correr, animação ao pular, animação ao se abaixar.
-(80 pontos) Fazer o personagem atender a pelo menos 3 comandos, ex.: pular, correr ou arremessar algum objeto.
+- (50 pontos) Movimentação de objetos na tela (2D ou 3D) a partir de um comando do usuário (input) e realizando - colisões com outros objetos.
+- (70 pontos) Apresentar alguma animação do personagem, ex: animação ao andar ou correr, animação ao pular, animação ao se abaixar.
+- (80 pontos) Fazer o personagem atender a pelo menos 3 comandos, ex.: pular, correr ou arremessar algum objeto.
 REFERÊNCIAS:
 
 PRINCIPAL REFERÊNCIA - Ponto de partida para aprender Unity com exemplos (EXPLORE todos os microgames): https://learn.unity.com/pathway/unity-essentials
