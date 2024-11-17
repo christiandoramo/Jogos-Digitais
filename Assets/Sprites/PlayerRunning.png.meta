@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: 69063f7eb8eb9f6468f487fee80d202c
+guid: 8e05de0beab7d604c8aee17c91311c81
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4192571269274922078
-    second: PlayerRunningArmed_0
+      213: -7257982234594085663
+    second: PlayerRunning_0
   - first:
-      213: -1336535393145163651
-    second: PlayerRunningArmed_1
+      213: -4314049834744492254
+    second: PlayerRunning_1
   - first:
-      213: -988469113663923096
-    second: PlayerRunningArmed_2
+      213: -657069699019773870
+    second: PlayerRunning_2
   - first:
-      213: 3838998479639778712
-    second: PlayerRunningArmed_3
+      213: 2488838144231768812
+    second: PlayerRunning_3
   - first:
-      213: -652698811001412305
-    second: PlayerRunningArmed_4
+      213: -7622931153581283948
+    second: PlayerRunning_4
   - first:
-      213: -3667779219461289739
-    second: PlayerRunningArmed_5
+      213: -4712788239981437653
+    second: PlayerRunning_5
   - first:
-      213: 391837716464629162
-    second: PlayerRunningArmed_6
+      213: 2188895267235616270
+    second: PlayerRunning_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -131,7 +131,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerRunningArmed_0
+      name: PlayerRunning_0
       rect:
         serializedVersion: 2
         x: 21
@@ -146,14 +146,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e5ce3a03b510f2a30800000000000000
-      internalID: 4192571269274922078
+      spriteID: 1e47ce0bc97764b90800000000000000
+      internalID: -7257982234594085663
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRunningArmed_1
+      name: PlayerRunning_1
       rect:
         serializedVersion: 2
         x: 83
@@ -168,14 +168,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d7078d5242ca37de0800000000000000
-      internalID: -1336535393145163651
+      spriteID: 22fc8b8388a6124c0800000000000000
+      internalID: -4314049834744492254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRunningArmed_2
+      name: PlayerRunning_2
       rect:
         serializedVersion: 2
         x: 151
@@ -190,14 +190,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 86cdd9804904842f0800000000000000
-      internalID: -988469113663923096
+      spriteID: 258e04d079e91e6f0800000000000000
+      internalID: -657069699019773870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRunningArmed_3
+      name: PlayerRunning_3
       rect:
         serializedVersion: 2
         x: 25
@@ -212,14 +212,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 895913007ccd64530800000000000000
-      internalID: 3838998479639778712
+      spriteID: ce280621b112a8220800000000000000
+      internalID: 2488838144231768812
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRunningArmed_4
+      name: PlayerRunning_4
       rect:
         serializedVersion: 2
         x: 87
@@ -234,19 +234,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f25e0f8b3e521f6f0800000000000000
-      internalID: -652698811001412305
+      spriteID: 495678bf088e53690800000000000000
+      internalID: -7622931153581283948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRunningArmed_5
+      name: PlayerRunning_5
       rect:
         serializedVersion: 2
-        x: 151
+        x: 147
         y: 65
-        width: 24
+        width: 28
         height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -256,19 +256,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5f8437d8b3e691dc0800000000000000
-      internalID: -3667779219461289739
+      spriteID: b2d944ea010d89eb0800000000000000
+      internalID: -4712788239981437653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRunningArmed_6
+      name: PlayerRunning_6
       rect:
         serializedVersion: 2
-        x: 23
+        x: 21
         y: 0
-        width: 22
+        width: 24
         height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -278,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa5797bb356107500800000000000000
-      internalID: 391837716464629162
+      spriteID: e06dc16f5a4806e10800000000000000
+      internalID: 2188895267235616270
       vertices: []
       indices: 
       edges: []
@@ -297,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PlayerRunning_0: -7257982234594085663
+      PlayerRunning_1: -4314049834744492254
+      PlayerRunning_2: -657069699019773870
+      PlayerRunning_3: 2488838144231768812
+      PlayerRunning_4: -7622931153581283948
+      PlayerRunning_5: -4712788239981437653
+      PlayerRunning_6: 2188895267235616270
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

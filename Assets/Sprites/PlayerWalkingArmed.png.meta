@@ -297,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PlayerWalkingArmed_0: -1545323247016297168
+      PlayerWalkingArmed_1: 4330314076807113331
+      PlayerWalkingArmed_2: -7236873388106917757
+      PlayerWalkingArmed_3: 4765995088010235854
+      PlayerWalkingArmed_4: 3479702433815096666
+      PlayerWalkingArmed_5: -5324266643540106905
+      PlayerWalkingArmed_6: -4840917815713444625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

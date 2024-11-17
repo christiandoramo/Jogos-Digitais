@@ -1,19 +1,28 @@
 fileFormatVersion: 2
-guid: 798387e3b00da0c42a754a7fa26aff1f
+guid: d84109ec22866cb4ea32390ebffb633a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 978942612559604503
-    second: PlayerIdle_0
+      213: -3128351650240848657
+    second: PlayerWalking_0
   - first:
-      213: 3499389992042037492
-    second: PlayerIdle_1
+      213: -5830660520099458109
+    second: PlayerWalking_1
   - first:
-      213: 6272215952258405886
-    second: PlayerIdle_2
+      213: -3877850119634150139
+    second: PlayerWalking_2
   - first:
-      213: 5525604288434156929
-    second: PlayerIdle_3
+      213: 7011344482617516438
+    second: PlayerWalking_3
+  - first:
+      213: 3756217731161235094
+    second: PlayerWalking_4
+  - first:
+      213: -3358549846494895355
+    second: PlayerWalking_5
+  - first:
+      213: 6391813760598695730
+    second: PlayerWalking_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -122,13 +131,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerIdle_0
+      name: PlayerWalking_0
       rect:
         serializedVersion: 2
-        x: 23
-        y: 63
-        width: 22
-        height: 50
+        x: 0
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 71bab159e17e59d00800000000000000
-      internalID: 978942612559604503
+      spriteID: fec13e2bfbcd594d0800000000000000
+      internalID: -3128351650240848657
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdle_1
+      name: PlayerWalking_1
       rect:
         serializedVersion: 2
-        x: 87
-        y: 63
-        width: 22
-        height: 48
+        x: 64
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,20 +168,108 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f0093e38a4509030800000000000000
-      internalID: 3499389992042037492
+      spriteID: 3c3d39d2625551fa0800000000000000
+      internalID: -5830660520099458109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdle_2
+      name: PlayerWalking_2
       rect:
         serializedVersion: 2
-        x: 23
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50d1007acdb1f2ac0800000000000000
+      internalID: -3877850119634150139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerWalking_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691ef44c8ac4d4160800000000000000
+      internalID: 7011344482617516438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerWalking_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69e93ec0024c02430800000000000000
+      internalID: 3756217731161235094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerWalking_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 503aa3f75b80461d0800000000000000
+      internalID: -3358549846494895355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerWalking_6
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
-        width: 22
-        height: 47
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,30 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ef596ec4d236b0750800000000000000
-      internalID: 6272215952258405886
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerIdle_3
-      rect:
-        serializedVersion: 2
-        x: 87
-        y: 0
-        width: 22
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1853e7d03d3eeac40800000000000000
-      internalID: 5525604288434156929
+      spriteID: 23f50feffb844b850800000000000000
+      internalID: 6391813760598695730
       vertices: []
       indices: 
       edges: []
@@ -213,7 +288,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6d3fe345262d8464e8805249be1eb7ab
     internalID: 0
     vertices: []
     indices: 
@@ -222,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PlayerWalking_0: -3128351650240848657
+      PlayerWalking_1: -5830660520099458109
+      PlayerWalking_2: -3877850119634150139
+      PlayerWalking_3: 7011344482617516438
+      PlayerWalking_4: 3756217731161235094
+      PlayerWalking_5: -3358549846494895355
+      PlayerWalking_6: 6391813760598695730
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
