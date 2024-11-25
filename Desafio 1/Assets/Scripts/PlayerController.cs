@@ -20,9 +20,12 @@ public class PlayerController : MonoBehaviour
     public Transform player;
     public TrailRenderer trailRenderer;
 
-
     public float runSpeed;
     public float acceleration;
+
+    public GameObject bulletPrefab;
+    public float shootCooldown = 0.5f;
+    private float shootCooldownTimer = 0f;
 
     private float targetSpeed;
     private float currentSpeed;
@@ -44,7 +47,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        player = player == null ? this.transform.GetChild(0) : player; 
+        player = player == null ? this.transform.GetChild(0) : player;
         customAnimator = player.GetComponent<CustomAnimator>();
         spriteRenderer = player.GetComponent<SpriteRenderer>();
         rb2 = player.GetComponent<Rigidbody2D>();
@@ -62,10 +65,19 @@ public class PlayerController : MonoBehaviour
         bool isShiftPressed = Input.GetKey(KeyCode.LeftShift);
         bool isJumpKeyDown = Input.GetButtonDown("Jump");
         float horizontalInput = Input.GetAxis("Horizontal");
+        bool isShootPressed = Input.GetButton("Fire1"); // down só quado clicka, sem down atira enquanto pressionar
 
         Move(isGrounded, horizontalInput, isShiftPressed);
         Jump(isJumpKeyDown, isGrounded);
+        Shoot(isShootPressed);
         Animate();
+    }
+    private void FixedUpdate()
+    {
+
+        if (isRunning && trailRenderer.enabled == false) trailRenderer.enabled = true;
+        else if (!isRunning && trailRenderer.enabled == true) trailRenderer.enabled = false;
+
     }
 
     void Animate()
@@ -90,7 +102,7 @@ public class PlayerController : MonoBehaviour
                 customAnimator.ChangeState(AnimationStates.WALKING);
             }
         }
-        else if (rb2.linearVelocity.x == 0 && isGrounded && customAnimator.currentState != AnimationStates.IDLING )
+        else if (rb2.linearVelocity.x == 0 && isGrounded && customAnimator.currentState != AnimationStates.IDLING)
         {
             customAnimator.ChangeState(AnimationStates.IDLING);
         }
@@ -105,26 +117,20 @@ public class PlayerController : MonoBehaviour
     {
         if (horizontalInput != 0 && isShiftPressed)
         {
-            Debug.Log("Running");
             targetSpeed = runSpeed; // Correr
             isRunning = true;
             isWalking = false;
         }
-        else if (horizontalInput != 0)
+        else if (horizontalInput != 0 && !isShiftPressed)
         {
-            Debug.Log("Walking");
             targetSpeed = moveSpeed; // Caminhar
             isWalking = true;
             isRunning = false;
         }
 
         currentSpeed = rb2.linearVelocity.x;
-        // Suavizar transi��o entre velocidades
-        // float newSpeed = Mathf.Lerp(currentSpeed, horizontalInput * targetSpeed, Time.deltaTime * acceleration);
+
         float newSpeed = Mathf.Lerp(currentSpeed, horizontalInput * targetSpeed, Time.deltaTime * acceleration);
-        //Debug.Log($"horizontalInput: {horizontalInput} acceleration: {acceleration}");
-        //Debug.Log($" Time.deltaTime: {Time.deltaTime} targetSpeed: {targetSpeed}");
-        //Debug.Log($"currentSpeed: {currentSpeed} newSpeed: {newSpeed}");
 
         rb2.linearVelocity = new Vector2(newSpeed, rb2.linearVelocity.y);
     }
@@ -136,12 +142,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    private void Shoot(bool isShootPressed)
     {
-        if (groundCheck != null)
+        shootCooldownTimer = shootCooldownTimer > 0 ? shootCooldownTimer - Time.deltaTime : shootCooldownTimer;
+        if (shootCooldownTimer <= 0 && isShootPressed)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            GameObject bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
+            if (bullet != null) bullet.GetComponent<Bullet>().SetPlayerTransform(player);
+            shootCooldownTimer = shootCooldown;
+            //isArmed = true;
         }
     }
 

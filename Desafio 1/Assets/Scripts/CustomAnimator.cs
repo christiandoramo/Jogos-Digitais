@@ -21,7 +21,7 @@ public class CustomAnimator : MonoBehaviour {
     }
     public void ChangeState(string newState)
     {
-        Debug.Log($"currentState: {this.currentState} = newState: {newState}");
+        //Debug.Log($"currentState: {this.currentState} = newState: {newState}");
 
         //if (!AnimatorHasState(newState))
         //{
