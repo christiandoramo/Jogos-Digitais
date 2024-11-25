@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 3f;
     public float jumpForce = 10f;
     public Rigidbody2D rb2;
     public Transform groundCheck;
@@ -17,38 +17,54 @@ public class PlayerController : MonoBehaviour
     public CustomAnimator customAnimator;
     public SpriteRenderer spriteRenderer;
 
-    public bool isArmed;
-    public bool isGrounded;
-    public bool isWalking;
-    public bool isRunning;
-    public bool isIdling;
-
     public Transform player;
+    public TrailRenderer trailRenderer;
+
+
+    public float runSpeed;
+    public float acceleration;
+
+    private float targetSpeed;
+    private float currentSpeed;
+
+    private bool isArmed;
+    private bool isGrounded;
+    private bool isWalking;
+    private bool isRunning;
+    private bool isIdling;
+
 
 
     private struct AnimationStates
     {
         public const string WALKING = "Walking";
+        public const string RUNNING = "Running";
         public const string IDLING = "Idling";
         public const string JUMPING = "Jumping";
     }
     void Start()
     {
-        player = player == null ? transform.GetChild(0) : player; 
+        player = player == null ? this.transform.GetChild(0) : player; 
         customAnimator = player.GetComponent<CustomAnimator>();
         spriteRenderer = player.GetComponent<SpriteRenderer>();
         rb2 = player.GetComponent<Rigidbody2D>();
         customAnimator.ChangeState(AnimationStates.IDLING);
+        trailRenderer = player.GetComponent<TrailRenderer>();
+
+        targetSpeed = moveSpeed; // Velocidade padrï¿½o
+        runSpeed = moveSpeed * 2f; // Velocidade mï¿½xima ao correr
+        currentSpeed = rb2.linearVelocity.x;
+        acceleration = 3f;
     }
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        if (!isGrounded) Debug.Log("flutuando");
-        bool isJumpPressed = Input.GetButtonDown("Jump");
+        bool isShiftPressed = Input.GetKey(KeyCode.LeftShift);
+        bool isJumpKeyDown = Input.GetButtonDown("Jump");
         float horizontalInput = Input.GetAxis("Horizontal");
-        Jump(isJumpPressed, isGrounded);
-        Move(isGrounded, horizontalInput);
 
+        Move(isGrounded, horizontalInput, isShiftPressed);
+        Jump(isJumpKeyDown, isGrounded);
         Animate();
     }
 
@@ -63,11 +79,18 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = false;
         }
 
-        if (rb2.linearVelocity.x != 0 && isGrounded && customAnimator.currentState != AnimationStates.WALKING)
+        if (rb2.linearVelocity.x != 0 && isGrounded)
         {
-            customAnimator.ChangeState(AnimationStates.WALKING);
+            if (isRunning && customAnimator.currentState != AnimationStates.RUNNING)
+            {
+                customAnimator.ChangeState(AnimationStates.RUNNING);
+            }
+            else if (isWalking && customAnimator.currentState != AnimationStates.WALKING)
+            {
+                customAnimator.ChangeState(AnimationStates.WALKING);
+            }
         }
-        else if (rb2.linearVelocity.x == 0 && isGrounded && customAnimator.currentState != AnimationStates.IDLING)
+        else if (rb2.linearVelocity.x == 0 && isGrounded && customAnimator.currentState != AnimationStates.IDLING )
         {
             customAnimator.ChangeState(AnimationStates.IDLING);
         }
@@ -78,19 +101,37 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-    void Move(bool isGrounded, float horizontalInput)
+    void Move(bool isGrounded, float horizontalInput, bool isShiftPressed)
     {
-        if (horizontalInput != 0)
+        if (horizontalInput != 0 && isShiftPressed)
         {
-            rb2.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb2.linearVelocity.y);
-            //else customAnimator.ChangeState("WalkingArmed");
+            Debug.Log("Running");
+            targetSpeed = runSpeed; // Correr
+            isRunning = true;
+            isWalking = false;
         }
+        else if (horizontalInput != 0)
+        {
+            Debug.Log("Walking");
+            targetSpeed = moveSpeed; // Caminhar
+            isWalking = true;
+            isRunning = false;
+        }
+
+        currentSpeed = rb2.linearVelocity.x;
+        // Suavizar transiï¿½ï¿½o entre velocidades
+        // float newSpeed = Mathf.Lerp(currentSpeed, horizontalInput * targetSpeed, Time.deltaTime * acceleration);
+        float newSpeed = Mathf.Lerp(currentSpeed, horizontalInput * targetSpeed, Time.deltaTime * acceleration);
+        //Debug.Log($"horizontalInput: {horizontalInput} acceleration: {acceleration}");
+        //Debug.Log($" Time.deltaTime: {Time.deltaTime} targetSpeed: {targetSpeed}");
+        //Debug.Log($"currentSpeed: {currentSpeed} newSpeed: {newSpeed}");
+
+        rb2.linearVelocity = new Vector2(newSpeed, rb2.linearVelocity.y);
     }
     void Jump(bool isJumpPressed, bool isGrounded)
     {
         if (isJumpPressed && isGrounded)
         {
-            Debug.Log("Pulou");
             rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce);
         }
     }
@@ -104,7 +145,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos() // função mostra a área do overlap da mascara de colisão no pé do player
+    private void OnDrawGizmos() // funï¿½ï¿½o mostra a ï¿½rea do overlap da mascara de colisï¿½o no pï¿½ do player
     {
         if (groundCheck != null)
         {

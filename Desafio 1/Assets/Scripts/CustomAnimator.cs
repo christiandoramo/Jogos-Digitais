@@ -14,7 +14,7 @@ public class CustomAnimator : MonoBehaviour {
     {
         foreach (var clip in animator.runtimeAnimatorController.animationClips)
         {
-            Debug.Log($"clip: {clip.name}");
+            //Debug.Log($"clip: {clip.name}");
             if (clip.name == stateName) return true;
         }
         return false;
@@ -28,7 +28,6 @@ public class CustomAnimator : MonoBehaviour {
         //    Debug.LogWarning($"Estado '{newState}' não existe no Animator!");
         //    return;
         //}
-        //Debug.Log("Passou");
         if (currentState.Equals(newState)) return;
         this.currentState = newState;
         animator.Play(newState);
