@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: e815c74309eb3fd439eff3c204c90b98
+guid: 68f205ca0b1f52d458eb7e4011c52ba6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3372995774635689252
-    second: PlayerIdleArmed_0
+      213: 2811058532078765922
+    second: PlayerJumpingArmed_0
   - first:
-      213: 8602010951983370999
-    second: PlayerIdleArmed_1
+      213: 1876139342897781899
+    second: PlayerJumpingArmed_1
   - first:
-      213: 8153870160221096121
-    second: PlayerIdleArmed_2
+      213: -3338105469242724413
+    second: PlayerJumpingArmed_2
   - first:
-      213: -4973339375775731158
-    second: PlayerIdleArmed_3
+      213: -1897147406644859716
+    second: PlayerJumpingArmed_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,89 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerIdleArmed_0
+      name: PlayerJumpingArmed_0
       rect:
         serializedVersion: 2
-        x: 23
-        y: 63
-        width: 22
-        height: 50
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 425cd0049c94fce20800000000000000
-      internalID: 3372995774635689252
+      spriteID: 267c26f57d2e20720800000000000000
+      internalID: 2811058532078765922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleArmed_1
+      name: PlayerJumpingArmed_1
       rect:
         serializedVersion: 2
-        x: 87
-        y: 63
-        width: 22
-        height: 48
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7f21dfaa26b706770800000000000000
-      internalID: 8602010951983370999
+      spriteID: b8c9e8acac2690a10800000000000000
+      internalID: 1876139342897781899
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleArmed_2
+      name: PlayerJumpingArmed_2
       rect:
         serializedVersion: 2
-        x: 23
+        x: 0
         y: 0
-        width: 22
-        height: 47
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9b8c2aca5bd582170800000000000000
-      internalID: 8153870160221096121
+      spriteID: 3cfaff203caaca1d0800000000000000
+      internalID: -3338105469242724413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleArmed_3
+      name: PlayerJumpingArmed_3
       rect:
         serializedVersion: 2
-        x: 87
+        x: 64
         y: 0
-        width: 22
-        height: 49
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a22bc6700362bfab0800000000000000
-      internalID: -4973339375775731158
+      spriteID: cbc21643c7afba5e0800000000000000
+      internalID: -1897147406644859716
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fc2a744bbdfe3d0479a684c2dbd326c7
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PlayerIdleArmed_0: 3372995774635689252
-      PlayerIdleArmed_1: 8602010951983370999
-      PlayerIdleArmed_2: 8153870160221096121
-      PlayerIdleArmed_3: -4973339375775731158
+      PlayerJumpingArmed_0: 2811058532078765922
+      PlayerJumpingArmed_1: 1876139342897781899
+      PlayerJumpingArmed_2: -3338105469242724413
+      PlayerJumpingArmed_3: -1897147406644859716
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

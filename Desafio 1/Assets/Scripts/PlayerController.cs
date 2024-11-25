@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     public bool isWalking;
     public bool isRunning;
     public bool isIdling;
+
+    public Transform player;
+
+
     private struct AnimationStates
     {
         public const string WALKING = "Walking";
@@ -30,33 +34,48 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        customAnimator = GetComponent<CustomAnimator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rb2 = GetComponent<Rigidbody2D>();
+        player = player == null ? transform.GetChild(0) : player; 
+        customAnimator = player.GetComponent<CustomAnimator>();
+        spriteRenderer = player.GetComponent<SpriteRenderer>();
+        rb2 = player.GetComponent<Rigidbody2D>();
         customAnimator.ChangeState(AnimationStates.IDLING);
     }
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        if (!isGrounded) Debug.Log("flutuando");
         bool isJumpPressed = Input.GetButtonDown("Jump");
         float horizontalInput = Input.GetAxis("Horizontal");
-
-        Move(isGrounded, horizontalInput);
         Jump(isJumpPressed, isGrounded);
+        Move(isGrounded, horizontalInput);
+
+        Animate();
     }
 
     void Animate()
     {
-        if (rb2.linearVelocity.x < 0) spriteRenderer.flipX = true;
-        else if (rb2.linearVelocity.x > 0) spriteRenderer.flipX = false;
+        if (rb2.linearVelocity.x < 0 && spriteRenderer.flipX == false)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (rb2.linearVelocity.x > 0 && spriteRenderer.flipX == true)
+        {
+            spriteRenderer.flipX = false;
+        }
 
-        if (rb2.linearVelocity.x != 0 && isGrounded)
+        if (rb2.linearVelocity.x != 0 && isGrounded && customAnimator.currentState != AnimationStates.WALKING)
         {
             customAnimator.ChangeState(AnimationStates.WALKING);
         }
-        else if (rb2.linearVelocity.x == 0 && isGrounded)
+        else if (rb2.linearVelocity.x == 0 && isGrounded && customAnimator.currentState != AnimationStates.IDLING)
         {
             customAnimator.ChangeState(AnimationStates.IDLING);
+        }
+
+        if (!isGrounded && customAnimator.currentState != AnimationStates.JUMPING)
+        {
+            customAnimator.ChangeState(AnimationStates.JUMPING);
+
         }
     }
     void Move(bool isGrounded, float horizontalInput)
@@ -71,8 +90,17 @@ public class PlayerController : MonoBehaviour
     {
         if (isJumpPressed && isGrounded)
         {
+            Debug.Log("Pulou");
             rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce);
-            //customAnimator.ChangeState("Jumping");
+        }
+    }
+
+    private void Shoot()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
 
