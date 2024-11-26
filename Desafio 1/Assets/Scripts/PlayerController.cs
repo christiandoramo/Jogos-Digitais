@@ -4,24 +4,28 @@ using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    public float jumpForce = 10f;
+    public float jumpForce = 10f; // Força do pulo
+    public float fallMultiplier = 5f; // Gravidade extra na descida
+    public float lowJumpMultiplier = 2f; // Gravidade extra ao cancelar o pulo
     public Rigidbody2D rb2;
     public Transform groundCheck;
-    public float groundCheckRadius = 0.3f;
+    public float groundCheckRadius = 1f;
     public LayerMask groundLayer;
     public Animator animator;
     public CustomAnimator customAnimator;
     public SpriteRenderer spriteRenderer;
     public SpriteRenderer armsSr;
+    public PlayerFeet playerFeet;
 
     public Transform player;
     public Transform arms;
 
-    public TrailRenderer trailRenderer;
+    //public TrailRenderer trailRenderer;
 
     public float runSpeed;
     public float acceleration;
@@ -41,7 +45,6 @@ public class PlayerController : MonoBehaviour
     private bool isWalking;
     private bool isRunning;
     private bool isIdling;
-
 
 
     private struct AnimationStates
@@ -73,56 +76,63 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = player.GetComponent<SpriteRenderer>();
         rb2 = player.GetComponent<Rigidbody2D>();
         customAnimator.ChangeState(AnimationStates.IDLING);
-        trailRenderer = player.GetComponent<TrailRenderer>();
+        //trailRenderer = player.GetComponent<TrailRenderer>();
+        //trailRenderer.enabled = false;
 
         targetSpeed = moveSpeed; // Velocidade padr�o
-        runSpeed = moveSpeed * 2f; // Velocidade m�xima ao correr
+        runSpeed = moveSpeed * 3f; // Velocidade m�xima ao correr
         currentSpeed = rb2.linearVelocity.x;
         acceleration = 3f;
     }
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = playerFeet.isGrounded;
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         bool isShiftPressed = Input.GetKey(KeyCode.LeftShift);
         bool isJumpKeyDown = Input.GetButtonDown("Jump");
         float horizontalInput = Input.GetAxis("Horizontal");
         bool isShootPressed = Input.GetButton("Fire1"); // down só quado clicka, sem down atira enquanto pressionar
 
         Move(horizontalInput, isShiftPressed);
-        Jump(isJumpKeyDown, isGrounded);
+        Jump(isJumpKeyDown);
         Shoot(isShootPressed);
-        Animate();
+        Animate(horizontalInput != 0);
+
     }
-    private void FixedUpdate()
+    void Animate(bool isMoving)
     {
-        if (isRunning && trailRenderer.enabled == false) trailRenderer.enabled = true;
-        else if (!isRunning && trailRenderer.enabled == true) trailRenderer.enabled = false;
+        //if (isRunning && trailRenderer.enabled == false) trailRenderer.enabled = true;
+        //else if (!isRunning && trailRenderer.enabled == true) trailRenderer.enabled = false;
 
         if (isArmed && !armsSr.enabled) armsSr.enabled = true; // se armado e com sprite de armed desabilitado então habilite
         else if (!isArmed && !!armsSr.enabled) armsSr.enabled = false;
-    }
-    void Animate()
-    {
-        StructMouseDirectionAndAngle structMouseDirectionAndAngle = GetStructMouseDirectionAndAngle(transform);
 
-        if (!isArmed && rb2.linearVelocity.x < 0 && spriteRenderer.flipX == false)
+        if (isArmed)
         {
-            spriteRenderer.flipX = true;
+            StructMouseDirectionAndAngle structMouseDirectionAndAngle = GetStructMouseDirectionAndAngle(player.transform);
+            if (structMouseDirectionAndAngle.direction.x < 0 && spriteRenderer.flipX == false) // Flipando em relação a arma - quando a arma aponta para esquerda deve flipar
+            {
+                spriteRenderer.flipX = true;
+
+            }
+            else if (-1 * structMouseDirectionAndAngle.direction.x < 0 && spriteRenderer.flipX == true)
+            {
+                spriteRenderer.flipX = false;
+            }
         }
-        else if (!isArmed && rb2.linearVelocity.x >= 0 && spriteRenderer.flipX == true)
+        else if (!isArmed)
         {
-            spriteRenderer.flipX = false;
-        }
-        else if (isArmed && structMouseDirectionAndAngle.direction.x < 0 && spriteRenderer.flipX == false) // Flipando em relação a arma - quando a arma aponta para esquerda deve flipar
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (isArmed && structMouseDirectionAndAngle.direction.x > 0 && spriteRenderer.flipX == true)
-        {
-            spriteRenderer.flipX = false;
+            if (isMoving && rb2.linearVelocity.x < -0.05 && spriteRenderer.flipX == false)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (isMoving && rb2.linearVelocity.x > 0.05 && spriteRenderer.flipX == true)
+            {
+                spriteRenderer.flipX = false;
+            }
         }
 
-        if (rb2.linearVelocity.x != 0 && isGrounded)
+        if (isMoving && Math.Abs(rb2.linearVelocity.x) > 0.05 && isGrounded)
         {
             if (isRunning)
             {
@@ -135,7 +145,7 @@ public class PlayerController : MonoBehaviour
                 else customAnimator.ChangeState(AnimationStates.WALKING_ARMED); // se armado
             }
         }
-        else if (rb2.linearVelocity.x == 0 && isGrounded)
+        else if (!isMoving && rb2.linearVelocity.x == 0 && isGrounded)
         {
             if (!isArmed) customAnimator.ChangeState(AnimationStates.IDLING); // se desarmado
             else customAnimator.ChangeState(AnimationStates.IDLING_ARMED); // se armado
@@ -169,11 +179,17 @@ public class PlayerController : MonoBehaviour
 
         rb2.linearVelocity = new Vector2(newSpeed, rb2.linearVelocity.y);
     }
-    void Jump(bool isJumpPressed, bool isGrounded)
+    void Jump(bool isJumpPressed)
     {
+        // Verifica se o jogador está pressionando o botão de pulo e está no chão
         if (isJumpPressed && isGrounded)
         {
-            rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce);
+            rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce); // Aplica o pulo
+        }
+
+        if (rb2.linearVelocity.y < 0)
+        {
+            rb2.linearVelocity += (fallMultiplier - 1) * Physics2D.gravity.y * Time.deltaTime * Vector2.up;
         }
     }
 
@@ -190,20 +206,13 @@ public class PlayerController : MonoBehaviour
             armedAnimationCooldownTimer = armedAnimationCooldown;
             isArmed = true;
         }
-        else if (armedAnimationCooldownTimer <= 0f) // se o tempo de desarme = armedAnimationCooldownTimer acabou desativar isArmed e mudar animações
+        else if (armedAnimationCooldownTimer <= 0f && !!isArmed) // se o tempo de desarme = armedAnimationCooldownTimer acabou desativar isArmed e mudar animações
         {
             isArmed = false;
         }
     }
 
-    private void OnDrawGizmos() // fun��o mostra a �rea do overlap da mascara de colis�o no p� do player
-    {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        }
-    }
+
 
     public static StructMouseDirectionAndAngle GetStructMouseDirectionAndAngle(Transform transf)
     {
@@ -212,6 +221,7 @@ public class PlayerController : MonoBehaviour
         Vector2 direction = (mousePosition - transf.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
         StructMouseDirectionAndAngle mouseDirectionAndAngle;
         mouseDirectionAndAngle.direction = direction;
         mouseDirectionAndAngle.angle = angle;

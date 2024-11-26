@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int enemyLayer; // Atribua no Inspector ou durante a inicialização
     private Rigidbody2D rb;
     public float bulletSpeed = 10f; // Velocidade da bala
     public float bulletLifetime = 5f;
@@ -14,12 +13,6 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         trailRenderer = GetComponent<TrailRenderer>();
         trailRenderer.enabled = true;
-        // Obtenha o índice da Layer "Enemy" se não tiver configurado no Inspector
-        if (enemyLayer == 0)
-        {
-            enemyLayer = LayerMask.NameToLayer("Enemy");
-        }
-
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
@@ -38,10 +31,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == enemyLayer)
+        if (collision.CompareTag("Enemy"))
         {
             Destroy(collision.gameObject); // Destroi o inimigo
             Destroy(gameObject);
+            GameManager.OnTriangleDestroy();
         }
     }
 
@@ -50,7 +44,6 @@ public class Bullet : MonoBehaviour
         if (rb.linearVelocity != Vector2.zero)
         {
             float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
-
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
