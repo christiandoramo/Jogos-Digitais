@@ -3,9 +3,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public float bulletSpeed = 10f; // Velocidade da bala
+    public float bulletSpeed = 10f;
     public float bulletLifetime = 5f;
-    private TrailRenderer trailRenderer;
+    private TrailRenderer trailRenderer; // rastro
     private Transform playerTransform;
 
     private void Start()
@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
         trailRenderer = GetComponent<TrailRenderer>();
         trailRenderer.enabled = true;
 
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // criando velocidade inicial baseado na posição do mouse e distancia para o player
         mousePosition.z = 0;
         Vector2 direction = (mousePosition - playerTransform.position).normalized;
         rb.linearVelocity = direction * bulletSpeed;
@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject); // Destroi o inimigo
+            Destroy(collision.gameObject);
             Destroy(gameObject);
             GameManager.OnTriangleDestroy();
         }
@@ -49,6 +49,6 @@ public class Bullet : MonoBehaviour
     }
     public void SetPlayerTransform(Transform player)
     {
-        playerTransform = player; // Atribui o transform do player à variável
+        playerTransform = player; // setter pra pegar player
     }
 }

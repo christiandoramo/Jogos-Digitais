@@ -1213,7 +1213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 521723155}
   - component: {fileID: 521723157}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PlayerFeet
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -1251,7 +1251,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
-  feedRadius: 0.1
+  feedRadius: 0.15
 --- !u!1 &587027853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 1.67, y: 0, z: 0}
   m_AnchorMin: {x: 0.2725, y: 0.055346806}
   m_AnchorMax: {x: 0.3675, y: 0.185}
-  m_AnchoredPosition: {x: 139.5, y: -8}
+  m_AnchoredPosition: {x: 139.5, y: -8.0000305}
   m_SizeDelta: {x: 124, y: 6.0092163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &610474438
@@ -1494,7 +1494,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.9
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1836,7 +1836,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 25f9b5dbe52370144b573d102de51f8b, type: 2}
+  m_Material: {fileID: 6200000, guid: 9fd7e141d3ad48b41a51dc54cacd99d7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3412,7 +3412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 1.67, y: 0, z: 0}
   m_AnchorMin: {x: 0.10875, y: 0.055346806}
   m_AnchorMax: {x: 0.28750002, y: 0.19971101}
-  m_AnchoredPosition: {x: 72, y: -8.5}
+  m_AnchoredPosition: {x: 72.00012, y: -8.5000305}
   m_SizeDelta: {x: 57, y: 1.0092163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1157873641
@@ -3462,7 +3462,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.05
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4146,7 +4146,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 7676afebad039304dbb3fb1015c91ee6, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6031,7 +6031,7 @@ GameObject:
   - component: {fileID: 1864706665}
   - component: {fileID: 1864706664}
   m_Layer: 8
-  m_Name: Triangle (7)
+  m_Name: T Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6193,7 +6193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1864995763
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6527,7 +6527,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 25f9b5dbe52370144b573d102de51f8b, type: 2}
+  m_Material: {fileID: 6200000, guid: 9fd7e141d3ad48b41a51dc54cacd99d7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6699,8 +6699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 10
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
+  fakeGravityThreshold: 2
   rb2: {fileID: 0}
   groundCheck: {fileID: 521723155}
   groundCheckRadius: 0.3
@@ -6715,7 +6714,7 @@ MonoBehaviour:
   player: {fileID: 1673593025}
   arms: {fileID: 1780101596}
   runSpeed: 0
-  acceleration: 0
+  acceleration: 3
   bulletPrefab: {fileID: 8801617829673835211, guid: 32690b5a5babe7643bc49ed9d60a56f5, type: 3}
   shootCooldown: 0.5
   armedAnimationCooldown: 5

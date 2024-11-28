@@ -8,10 +8,10 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 3f;
-    public float jumpForce = 10f; // Força do pulo
-    public float fallMultiplier = 5f; // Gravidade extra na descida
-    public float lowJumpMultiplier = 2f; // Gravidade extra ao cancelar o pulo
+    public float moveSpeed = 8f;
+    public float jumpForce = 8f;
+    public float fakeGravityThreshold = 2f; // simulando gravidade mais forte ao cair (final do pulo)
+
     public Rigidbody2D rb2;
     public Transform groundCheck;
     public float groundCheckRadius = 1f;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     //public TrailRenderer trailRenderer;
 
     public float runSpeed;
-    public float acceleration;
+    public float acceleration = 3f;
 
     public GameObject bulletPrefab;
     public float shootCooldown = 0.5f;
@@ -76,13 +76,14 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = player.GetComponent<SpriteRenderer>();
         rb2 = player.GetComponent<Rigidbody2D>();
         customAnimator.ChangeState(AnimationStates.IDLING);
+
         //trailRenderer = player.GetComponent<TrailRenderer>();
         //trailRenderer.enabled = false;
 
-        targetSpeed = moveSpeed; // Velocidade padr�o
-        runSpeed = moveSpeed * 3f; // Velocidade m�xima ao correr
+        targetSpeed = moveSpeed;
+        runSpeed = moveSpeed * 2f;
+
         currentSpeed = rb2.linearVelocity.x;
-        acceleration = 3f;
     }
     void Update()
     {
@@ -110,7 +111,7 @@ public class PlayerController : MonoBehaviour
         if (isArmed)
         {
             StructMouseDirectionAndAngle structMouseDirectionAndAngle = GetStructMouseDirectionAndAngle(player.transform);
-            if (structMouseDirectionAndAngle.direction.x < 0 && spriteRenderer.flipX == false) // Flipando em relação a arma - quando a arma aponta para esquerda deve flipar
+            if (structMouseDirectionAndAngle.direction.x < 0 && spriteRenderer.flipX == false) // flipa em relação a arma - quando a arma aponta para esquerda deve flipar
             {
                 spriteRenderer.flipX = true;
 
@@ -132,7 +133,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isMoving && Math.Abs(rb2.linearVelocity.x) > 0.05 && isGrounded)
+        if (isMoving && Math.Abs(rb2.linearVelocity.x) > 0.1f * moveSpeed && isGrounded)
         {
             if (isRunning)
             {
@@ -145,7 +146,7 @@ public class PlayerController : MonoBehaviour
                 else customAnimator.ChangeState(AnimationStates.WALKING_ARMED); // se armado
             }
         }
-        else if (!isMoving && rb2.linearVelocity.x == 0 && isGrounded)
+        else if (!isMoving && Math.Abs(rb2.linearVelocity.x) <= 0.1f && isGrounded)
         {
             if (!isArmed) customAnimator.ChangeState(AnimationStates.IDLING); // se desarmado
             else customAnimator.ChangeState(AnimationStates.IDLING_ARMED); // se armado
@@ -162,13 +163,13 @@ public class PlayerController : MonoBehaviour
     {
         if (horizontalInput != 0 && isShiftPressed)
         {
-            targetSpeed = runSpeed; // Correr
+            targetSpeed = runSpeed;
             isRunning = true;
             isWalking = false;
         }
-        else if (horizontalInput != 0 && !isShiftPressed)
+        else if (horizontalInput != 0)
         {
-            targetSpeed = moveSpeed; // Caminhar
+            targetSpeed = moveSpeed;
             isWalking = true;
             isRunning = false;
         }
@@ -181,15 +182,18 @@ public class PlayerController : MonoBehaviour
     }
     void Jump(bool isJumpPressed)
     {
-        // Verifica se o jogador está pressionando o botão de pulo e está no chão
         if (isJumpPressed && isGrounded)
         {
-            rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce); // Aplica o pulo
+            rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce);
         }
 
-        if (rb2.linearVelocity.y < 0)
+        if (rb2.linearVelocity.y < fakeGravityThreshold && rb2.linearVelocity.y > 0.1f * fakeGravityThreshold && !isGrounded && rb2.gravityScale == 1)
         {
-            rb2.linearVelocity += (fallMultiplier - 1) * Physics2D.gravity.y * Time.deltaTime * Vector2.up;
+            rb2.gravityScale = 3; // gravidade falsa - mais dinamico
+        }
+        else if (rb2.linearVelocity.y > 0 && rb2.gravityScale != 1)
+        {
+            rb2.gravityScale = 1;
         }
     }
 

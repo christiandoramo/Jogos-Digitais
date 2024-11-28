@@ -45,6 +45,6 @@ public class PlayerFeet : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, feedRadius);  // Raio de 5f para visualização
+        Gizmos.DrawWireSphere(transform.position, feedRadius); 
     }
 }
