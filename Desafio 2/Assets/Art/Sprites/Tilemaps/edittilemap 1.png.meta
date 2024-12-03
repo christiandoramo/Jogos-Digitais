@@ -1,0 +1,1250 @@
+fileFormatVersion: 2
+guid: 860bada09388c1845a6721d7c18e323b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -973184505497439306
+    second: edittilemap 1_0
+  - first:
+      213: -1177575101375240360
+    second: edittilemap 1_1
+  - first:
+      213: 415568606284601642
+    second: edittilemap 1_2
+  - first:
+      213: 2672155657316278493
+    second: edittilemap 1_3
+  - first:
+      213: 7806355601513084013
+    second: edittilemap 1_4
+  - first:
+      213: 9168398177397312369
+    second: edittilemap 1_5
+  - first:
+      213: 5316391246120115376
+    second: edittilemap 1_6
+  - first:
+      213: 6640462158686172675
+    second: edittilemap 1_7
+  - first:
+      213: -8456166064300137286
+    second: edittilemap 1_8
+  - first:
+      213: 5499425980024413487
+    second: edittilemap 1_9
+  - first:
+      213: 6652249455794015797
+    second: edittilemap 1_10
+  - first:
+      213: 1020037768953602134
+    second: edittilemap 1_11
+  - first:
+      213: 8003156938030045623
+    second: edittilemap 1_12
+  - first:
+      213: -5838159742798734095
+    second: edittilemap 1_13
+  - first:
+      213: 7928976010997611883
+    second: edittilemap 1_14
+  - first:
+      213: -1622377605208563257
+    second: edittilemap 1_15
+  - first:
+      213: -10204981034076643
+    second: edittilemap 1_16
+  - first:
+      213: -8584752667110143952
+    second: edittilemap 1_17
+  - first:
+      213: -8489742022982900009
+    second: edittilemap 1_18
+  - first:
+      213: 6211326003779540279
+    second: edittilemap 1_19
+  - first:
+      213: 6222904229871031282
+    second: edittilemap 1_20
+  - first:
+      213: 2439622022569936757
+    second: edittilemap 1_21
+  - first:
+      213: -4994455335847837177
+    second: edittilemap 1_22
+  - first:
+      213: -4887531011174523991
+    second: edittilemap 1_23
+  - first:
+      213: -8406883554501662791
+    second: edittilemap 1_24
+  - first:
+      213: 4375800039498071143
+    second: edittilemap 1_25
+  - first:
+      213: 5455421925431567452
+    second: edittilemap 1_26
+  - first:
+      213: 5437036961912757050
+    second: edittilemap 1_27
+  - first:
+      213: -3065334391354406953
+    second: edittilemap 1_28
+  - first:
+      213: -3673720758367808179
+    second: edittilemap 1_29
+  - first:
+      213: -8951595163374875216
+    second: edittilemap 1_30
+  - first:
+      213: -8270984029579453751
+    second: edittilemap 1_31
+  - first:
+      213: -2294857487109905293
+    second: edittilemap 1_32
+  - first:
+      213: 7998140412312697364
+    second: edittilemap 1_33
+  - first:
+      213: -1064266163653431703
+    second: edittilemap 1_34
+  - first:
+      213: -4442675910939817230
+    second: edittilemap 1_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: edittilemap 1_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 739
+        width: 169
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b339e039dd8e72f0800000000000000
+      internalID: -973184505497439306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_1
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 740
+        width: 78
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8572f223fa968afe0800000000000000
+      internalID: -1177575101375240360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_2
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 743
+        width: 538
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a29d565127564c500800000000000000
+      internalID: 415568606284601642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_3
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 572
+        width: 296
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd023e2a967651520800000000000000
+      internalID: 2672155657316278493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_4
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 665
+        width: 127
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d64719a4f0fb55c60800000000000000
+      internalID: 7806355601513084013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_5
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 669
+        width: 125
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17b0b1be091bc3f70800000000000000
+      internalID: 9168398177397312369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_6
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 662
+        width: 82
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bc5cffbbad97c940800000000000000
+      internalID: 5316391246120115376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_7
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 657
+        width: 165
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 306b9e09629a72c50800000000000000
+      internalID: 6640462158686172675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_8
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 575
+        width: 129
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab46da764c9a5aa80800000000000000
+      internalID: -8456166064300137286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_9
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 575
+        width: 291
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2dd8e7aac2e15c40800000000000000
+      internalID: 5499425980024413487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_10
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 569
+        width: 80
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53e43e982a9815c50800000000000000
+      internalID: 6652249455794015797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_11
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 501
+        width: 54
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65026fb42f6e72e00800000000000000
+      internalID: 1020037768953602134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_12
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 500
+        width: 47
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b9dbf425dce01f60800000000000000
+      internalID: 8003156938030045623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_13
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 482
+        width: 34
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fcde7455a0bafea0800000000000000
+      internalID: -5838159742798734095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_14
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 513
+        width: 52
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6d3b182ca1690e60800000000000000
+      internalID: 7928976010997611883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_15
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 491
+        width: 49
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c1aefde9282c79e0800000000000000
+      internalID: -1622377605208563257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_16
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 494
+        width: 55
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d163682bf9ebbdff0800000000000000
+      internalID: -10204981034076643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_17
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 494
+        width: 20
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0380058eee4dcd880800000000000000
+      internalID: -8584752667110143952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_18
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 481
+        width: 124
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d6e5655c906e2a80800000000000000
+      internalID: -8489742022982900009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_19
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 486
+        width: 126
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7351d676710133650800000000000000
+      internalID: 6211326003779540279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_20
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 436
+        width: 37
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f31dbc3d623c5650800000000000000
+      internalID: 6222904229871031282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_21
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 417
+        width: 45
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5774089cd474bd120800000000000000
+      internalID: 2439622022569936757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_22
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 412
+        width: 123
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7024c34755120bab0800000000000000
+      internalID: -4994455335847837177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_23
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 411
+        width: 127
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ab9c3ac0700c2cb0800000000000000
+      internalID: -4887531011174523991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_24
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 214
+        width: 297
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b7ead1e2ffb45b80800000000000000
+      internalID: -8406883554501662791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_25
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 297
+        width: 292
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76c3c62b3f6f9bc30800000000000000
+      internalID: 4375800039498071143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_26
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 301
+        width: 168
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c54e93d465d85bb40800000000000000
+      internalID: 5455421925431567452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_27
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 216
+        width: 295
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3b9a796f4c347b40800000000000000
+      internalID: 5437036961912757050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_28
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 218
+        width: 167
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d74885ac9eb575d0800000000000000
+      internalID: -3065334391354406953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_29
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 142
+        width: 125
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4512893f62540dc0800000000000000
+      internalID: -3673720758367808179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_30
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 181
+        width: 544
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bd8fe160ab85c380800000000000000
+      internalID: -8951595163374875216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_31
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 54
+        width: 332
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cadcfdb8df873d80800000000000000
+      internalID: -8270984029579453751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_32
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 7
+        width: 168
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3742bae26470720e0800000000000000
+      internalID: -2294857487109905293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_33
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 67
+        width: 130
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41a389b345a1ffe60800000000000000
+      internalID: 7998140412312697364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_34
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 1
+        width: 129
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96e28f81097fa31f0800000000000000
+      internalID: -1064266163653431703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_35
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 7
+        width: 139
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fa4f3c1cc17852c0800000000000000
+      internalID: -4442675910939817230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_36
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 7
+        width: 168
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a33fe19a1f2a08b4bab442bf9fba5d81
+      internalID: 1411635301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_37
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 75
+        width: 79
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44205da265b122c4e809ffe33f656b27
+      internalID: -2056730025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_38
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 6
+        width: 76
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a754856e86cd1f44b7fa51a361cd570
+      internalID: 1769118161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_39
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 148
+        width: 122
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af540c2337c152b4d82dac341c40146c
+      internalID: -625139199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_40
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 2
+        width: 257
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9af89926163c5bd4fab8c47bd6b32c8c
+      internalID: 224600354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_42
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 279
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1752c6cbae1d3bd4da4f6807f13b3147
+      internalID: 1485404689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_43
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 297
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa1045c840e4ed449988855bd9dfbd22
+      internalID: 1634935702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_41
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 342
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c703e2159fb90834aa1c9ebc24f7ef7c
+      internalID: 720079005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5be8b72e587520b4fa66a66c8a59ada9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      edittilemap 1_0: -973184505497439306
+      edittilemap 1_1: -1177575101375240360
+      edittilemap 1_10: 6652249455794015797
+      edittilemap 1_11: 1020037768953602134
+      edittilemap 1_12: 8003156938030045623
+      edittilemap 1_13: -5838159742798734095
+      edittilemap 1_14: 7928976010997611883
+      edittilemap 1_15: -1622377605208563257
+      edittilemap 1_16: -10204981034076643
+      edittilemap 1_17: -8584752667110143952
+      edittilemap 1_18: -8489742022982900009
+      edittilemap 1_19: 6211326003779540279
+      edittilemap 1_2: 415568606284601642
+      edittilemap 1_20: 6222904229871031282
+      edittilemap 1_21: 2439622022569936757
+      edittilemap 1_22: -4994455335847837177
+      edittilemap 1_23: -4887531011174523991
+      edittilemap 1_24: -8406883554501662791
+      edittilemap 1_25: 4375800039498071143
+      edittilemap 1_26: 5455421925431567452
+      edittilemap 1_27: 5437036961912757050
+      edittilemap 1_28: -3065334391354406953
+      edittilemap 1_29: -3673720758367808179
+      edittilemap 1_3: 2672155657316278493
+      edittilemap 1_30: -8951595163374875216
+      edittilemap 1_31: -8270984029579453751
+      edittilemap 1_32: -2294857487109905293
+      edittilemap 1_33: 7998140412312697364
+      edittilemap 1_34: -1064266163653431703
+      edittilemap 1_35: -4442675910939817230
+      edittilemap 1_36: 1411635301
+      edittilemap 1_37: -2056730025
+      edittilemap 1_38: 1769118161
+      edittilemap 1_39: -625139199
+      edittilemap 1_4: 7806355601513084013
+      edittilemap 1_40: 224600354
+      edittilemap 1_41: 720079005
+      edittilemap 1_42: 1485404689
+      edittilemap 1_43: 1634935702
+      edittilemap 1_5: 9168398177397312369
+      edittilemap 1_6: 5316391246120115376
+      edittilemap 1_7: 6640462158686172675
+      edittilemap 1_8: -8456166064300137286
+      edittilemap 1_9: 5499425980024413487
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
