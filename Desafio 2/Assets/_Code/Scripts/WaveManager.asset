@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aec1367b3a98834586e885f2413df5b, type: 3}
+  m_Name: WaveManager
+  m_EditorClassIdentifier: 
+  nightmareModeProb: 0
+  enemiesMultiplier: 2
+  zombiePrefab: {fileID: 1807513051620678273, guid: 882765f0a370e5748ae36ec099cb1a4a, type: 3}
+  portalPrefab: {fileID: 161459506853406397, guid: fa237be65574da943812e01c83ea0869, type: 3}
+  currentEnemies: 0
+  spawnEnemyInterval: 4
+  waveAmount: 3
+  currentWave: 0
+  currentEnemiesWaveAmount: 0

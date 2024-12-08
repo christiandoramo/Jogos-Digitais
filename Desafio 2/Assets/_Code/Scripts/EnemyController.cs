@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Splines;
 
 public class EnemyController : MonoBehaviour
 {
@@ -41,6 +39,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        player = player == null ? GameObject.FindGameObjectWithTag("Player").transform : player; // pega o player já na cena
         enemyBody = enemyBody == null ? this.transform.GetChild(0) : enemyBody;
         customAnimator = enemyBody.GetComponent<CustomAnimator>();
         spriteRenderer = enemyBody.GetComponent<SpriteRenderer>();
@@ -58,12 +57,6 @@ public class EnemyController : MonoBehaviour
         FollowPlayer();
         Animate();
     }
-
-    //private void OnDestroy()
-    //{
-    //    rb2.linearVelocity = Vector2.zero;
-    //    customAnimator.ChangeState(AnimationStates.DYING);
-    //}
 
     void FollowPlayer()
     {
@@ -95,6 +88,7 @@ public class EnemyController : MonoBehaviour
             Move();
         }
     }
+
     private void Move()
     {
         Vector2 direction = (player.position - enemyBody.transform.position).normalized;
@@ -141,6 +135,14 @@ public class EnemyController : MonoBehaviour
         customAnimator.ChangeState(AnimationStates.DYING);
         float duration = customAnimator.GetAnimationDuration(AnimationStates.DYING);
         Destroy(gameObject, duration * 2);
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.waveManager.currentEnemies--;
+        }
     }
 
     //void Die()
