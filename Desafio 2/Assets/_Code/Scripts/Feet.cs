@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
-using static PlayerController;
 
 [ExecuteInEditMode]
-public class PlayerFeet : MonoBehaviour
+public class Feet : MonoBehaviour
 {
-    [Header("Player feet variáveis")]
-    public bool isGrounded;
-    [TooltipAttribute("layer de colisão com o player para pular")] public LayerMask layerMask;
-    public float feedRadius = 1f;
 
-    void Start()
-    {
-        Debug.Log("debug no  edit mode");
-    }
+
+    [Header("Feet variáveis")]
+    public bool isGrounded;
+    private bool isColliding;
+    [TooltipAttribute("layer de colisão com o Ator (inimigo, player ou npc) para pular")] 
+    [SerializeField] private LayerMask layerMask;
+    public float feetRadius = 1f;
+
+    //void Start()
+    //{
+    //    Debug.Log("PlayerFeet.cs: debug liberado no edit mode");
+    //}
     void Update()
     {
         CheckFloor();
@@ -24,7 +27,7 @@ public class PlayerFeet : MonoBehaviour
     /// </summary>
     private void CheckFloor()
     {
-        Collider2D collider = Physics2D.OverlapCircle(transform.position,feedRadius, layerMask);
+        Collider2D collider = Physics2D.OverlapCircle(transform.position,feetRadius, layerMask);
         if (!collider)
         {
             isGrounded = false;
@@ -56,6 +59,6 @@ public class PlayerFeet : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, feedRadius); 
+        Gizmos.DrawWireSphere(transform.position, feetRadius); 
     }
 }

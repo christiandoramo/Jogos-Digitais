@@ -49,13 +49,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public static void OnTriangleDestroy()
-    {
-        if (instance == null) return;
+    //public static void OnTriangleDestroy()
+    //{
+    //    if (instance == null) return;
 
-        totalTriangulos--;
-        instance.UpdateCount();
-    }
+    //    totalTriangulos--;
+    //    instance.UpdateCount();
+    //}
 
     private void UpdateCount()
     {

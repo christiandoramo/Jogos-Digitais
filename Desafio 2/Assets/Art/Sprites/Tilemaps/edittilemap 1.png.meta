@@ -156,7 +156,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -1123,12 +1123,12 @@ TextureImporter:
       name: edittilemap 1_42
       rect:
         serializedVersion: 2
-        x: 214
-        y: 279
-        width: 16
-        height: 16
+        x: 702
+        y: 490
+        width: 64
+        height: 60
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1145,12 +1145,12 @@ TextureImporter:
       name: edittilemap 1_43
       rect:
         serializedVersion: 2
-        x: 214
-        y: 297
-        width: 16
-        height: 16
+        x: 607
+        y: 486
+        width: 60
+        height: 60
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1167,12 +1167,12 @@ TextureImporter:
       name: edittilemap 1_41
       rect:
         serializedVersion: 2
-        x: 202
-        y: 342
-        width: 16
-        height: 16
+        x: 210
+        y: 588
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1181,6 +1181,72 @@ TextureImporter:
       bones: []
       spriteID: c703e2159fb90834aa1c9ebc24f7ef7c
       internalID: 720079005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_44
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 490
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b61a6c092df4324e933b32c03a2e345
+      internalID: 628095157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_45
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 490
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f234ce9fabf09f448334a1950315f43
+      internalID: -365828717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edittilemap 1_46
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 666
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1c9b99420297fa4fa2f0b5ebf6677e2
+      internalID: -77672156
       vertices: []
       indices: 
       edges: []
@@ -1238,6 +1304,9 @@ TextureImporter:
       edittilemap 1_41: 720079005
       edittilemap 1_42: 1485404689
       edittilemap 1_43: 1634935702
+      edittilemap 1_44: 628095157
+      edittilemap 1_45: -365828717
+      edittilemap 1_46: -77672156
       edittilemap 1_5: 9168398177397312369
       edittilemap 1_6: 5316391246120115376
       edittilemap 1_7: 6640462158686172675

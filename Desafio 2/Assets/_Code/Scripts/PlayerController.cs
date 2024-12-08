@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public CustomAnimator customAnimator;
     public SpriteRenderer spriteRenderer;
     public SpriteRenderer armsSr;
-    public PlayerFeet playerFeet;
+    public Feet playerFeet;
 
     public Transform player;
     public Transform arms;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool isWalking;
     private bool isRunning;
-    private bool isIdling;
+    // private bool isIdling;
 
 
     private struct AnimationStates
@@ -204,6 +204,10 @@ public class PlayerController : MonoBehaviour
 
         if (shootCooldownTimer <= 0 && isShootPressed)
         {
+            //Vector3 pos = player.transform.position;
+            //if (!spriteRenderer.flipX) pos.x *= 1.02f;
+            //else pos.x *= 0.98f;
+
             GameObject bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
             if (bullet != null) bullet.GetComponent<Bullet>().SetPlayerTransform(player);
             shootCooldownTimer = shootCooldown;

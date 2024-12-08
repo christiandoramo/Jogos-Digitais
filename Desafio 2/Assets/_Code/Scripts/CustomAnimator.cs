@@ -1,3 +1,5 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class CustomAnimator : MonoBehaviour {
@@ -21,15 +23,24 @@ public class CustomAnimator : MonoBehaviour {
     }
     public void ChangeState(string newState)
     {
-        //Debug.Log($"currentState: {this.currentState} = newState: {newState}");
-
-        //if (!AnimatorHasState(newState))
-        //{
-        //    Debug.LogWarning($"Estado '{newState}' não existe no Animator!");
-        //    return;
-        //}
+        if (animator == null) return;
         if (currentState.Equals(newState)) return;
         this.currentState = newState;
         animator.Play(newState);
+    }
+
+    public float GetAnimationDuration(string clipName) // float seconds
+    {
+        foreach (var clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+            {
+                Debug.Log($"duration for {clipName}: {clip.length}");
+
+                return clip.length;
+            }
+                // tempo em segundos
+        }
+        return 0f;
     }
 }

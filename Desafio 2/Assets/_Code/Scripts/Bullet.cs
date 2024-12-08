@@ -29,15 +29,15 @@ public class Bullet : MonoBehaviour
         AlignToVelocity();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-            GameManager.OnTriangleDestroy();
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (!collision.CompareTag("Player"))
+    //    {
+    //       // Destroy(collision.gameObject);
+    //        Destroy(gameObject);
+    //        //GameManager.OnTriangleDestroy();
+    //    }
+    //}
 
     private void AlignToVelocity()
     {
