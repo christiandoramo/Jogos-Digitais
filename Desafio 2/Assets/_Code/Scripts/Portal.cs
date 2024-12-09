@@ -4,7 +4,7 @@ public class Portal : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer; 
     public bool isActivated = false;
-    public float gradientSpeed = 1.0f; 
+    private float gradientSpeed = 1.0f; 
 
     private Color colorRed = Color.red; 
     private Color colorBlack = Color.black; 

@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
+    public int hp = 100;
     public float moveSpeed = 8f;
     public float jumpForce = 8f;
     public float fakeGravityThreshold = 2f; // simulando gravidade mais forte ao cair (final do pulo)

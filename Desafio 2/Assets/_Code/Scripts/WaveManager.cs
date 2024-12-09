@@ -18,7 +18,7 @@ public class WaveManager : ScriptableObject
 
 
     [Tooltip("Lista de portais por onde inimigos instanciam")]
-    private List<Transform> portals = new();
+    public List<GameObject> portals = new();
     [Tooltip("Objeto vazio com inimigos")]
 
     [SerializeField] GameObject zombiePrefab;
@@ -53,23 +53,30 @@ public class WaveManager : ScriptableObject
         }
         if (portalsEmpty == null)
         {
-            GameObject map = GameObject.Find("Environment/Map");
-            if (map != null)
-            {
-                portalsEmpty = new GameObject("Portals");
-                portalsEmpty.transform.parent = map.transform;
+            PortalSpawn();
+        }
+    }
 
-                // limitar de  X=-6 Y=1.5Y ate X=38 Y=1.5Y
-                Vector3 randomPosition = new Vector3((float)Random.Range(6, 38), 1.5f, 0f);
-                GameObject newPortal = Instantiate(portalPrefab, randomPosition, Quaternion.identity);
-    
-                newPortal.transform.parent = portalsEmpty.transform;
-                portals.Add(newPortal.transform);
-            }
-            else
-            {
-                Debug.Log("GameObject.Find(\"Environment/Map\") falhou");
-            }
+    private void PortalSpawn()
+    {
+        GameObject map = GameObject.Find("Environment/Map");
+        if (map != null)
+        {
+            portalsEmpty = new GameObject("Portals");
+            portalsEmpty.transform.parent = map.transform;
+
+            // limitar de  X=-6 Y=1.5Y ate X=38 Y=1.5Y
+            Vector3 randomPosition = new Vector3((float)Random.Range(6, 38), 1.5f, 0f);
+            GameObject newPortal = Instantiate(portalPrefab, randomPosition, Quaternion.identity);
+            Debug.Log("Instanciou em: " + newPortal.transform.position);
+
+            newPortal.transform.parent = portalsEmpty.transform;
+
+            portals.Add(newPortal);
+        }
+        else
+        {
+            Debug.Log("GameObject.Find(\"Environment/Map\") falhou");
         }
     }
 
@@ -77,9 +84,13 @@ public class WaveManager : ScriptableObject
     {
         currentWave++;
         if (currentWave > waveAmount) return;
-
         currentEnemiesWaveAmount = previousEnemiesWaveAmount * enemiesMultiplier;
+        previousEnemiesWaveAmount = currentEnemiesWaveAmount;
+
+        if (Random.Range(0, 2) > 0) currentEnemiesWaveAmount *= enemiesMultiplier;
         currentEnemies = currentEnemiesWaveAmount;
+
+        if (Random.Range(0, 2) > 0) PortalSpawn();
 
         MonoBehaviour behaviour = FindAnyObjectByType<MonoBehaviour>();
         if (behaviour != null)
@@ -92,7 +103,7 @@ public class WaveManager : ScriptableObject
     {
         for (int i = 0; i < enemyCount; i++)
         {
-            Transform portalChosen = portals[Random.Range(0, portals.Count())];
+            Transform portalChosen = portals[Random.Range(0, portals.Count())].transform;
             GameObject enemy = Instantiate(zombiePrefab, portalChosen.position, Quaternion.identity);
             if (enemiesEmpty != null)
             {

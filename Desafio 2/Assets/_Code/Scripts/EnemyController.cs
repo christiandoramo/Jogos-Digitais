@@ -103,10 +103,12 @@ public class EnemyController : MonoBehaviour
     }
     IEnumerator HandleCollision()
     {
+        PlayerController playerController = player.GetComponentInParent<PlayerController>();
+        playerController.hp -= 34; // da 50 de dano ao colidir com o player
         isColliding = true;
         rb2.linearVelocity = Vector2.zero;
         isMoving = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         isColliding = false;
     }
 
@@ -131,10 +133,23 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
-        rb2.linearVelocity = Vector2.zero;
+        //BoxCollider2D bc = GetComponent<BoxCollider2D>();
+
+        //rb2.linearVelocity = Vector2.zero;
+        //rb2.bodyType = RigidbodyType2D.Kinematic;
+        //bc.forceSendLayers = 0;
+        //bc.forceReceiveLayers = 0;
+
+
+        //// tem que igonorar apenas entre os corpos e não o layer
+        //if (bc != null && playerCollider != null)
+        //{
+        //    Physics2D.IgnoreCollision(bc, playerCollider);
+        //}
+
         customAnimator.ChangeState(AnimationStates.DYING);
         float duration = customAnimator.GetAnimationDuration(AnimationStates.DYING);
-        Destroy(gameObject, duration * 2);
+        Destroy(gameObject, duration);
     }
 
     private void OnDestroy()
