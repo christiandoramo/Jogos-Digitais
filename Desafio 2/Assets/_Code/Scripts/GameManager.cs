@@ -36,23 +36,32 @@ public class GameManager : MonoBehaviour
 
 
 
-    void Awake()
+    // código só roda ao carregar o script
+    //void Awake()
+    //{
+    //    // GameManager é único na cena
+    //    if (instance == null)
+    //    {
+    //        instance = this; // definindo a instancia do objeto como estática para ser acessado como um
+    //                         // singleton em outros arquivos
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    void Start()
     {
-        // GameManager é único na cena
         if (instance == null)
         {
             instance = this; // definindo a instancia do objeto como estática para ser acessado como um
                              // singleton em outros arquivos
-
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-
-    void Start()
-    {
         playerController = player.GetComponent<PlayerController>();
 
         hpCounterUI.maxValue = playerController.hp;
@@ -133,7 +142,7 @@ public class GameManager : MonoBehaviour
             {
                 hpCounterUI.fillRect.GetComponent<Image>().color = Color.red; // Barra vermelha para HP crítico
             }
-            else if(playerController.hp < 100)
+            else if (playerController.hp < 100)
             {
                 hpCounterUI.fillRect.GetComponent<Image>().color = Color.green; // Barra verde para HP normal
             }
@@ -145,13 +154,13 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         Time.timeScale = 0; // pausa jogo
-
         if (victoryPanel != null)
             victoryPanel.SetActive(true);
     }
 
     public void RestartGame()
     {
+        Destroy(instance);
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // recarrega cena - "restart"
     }

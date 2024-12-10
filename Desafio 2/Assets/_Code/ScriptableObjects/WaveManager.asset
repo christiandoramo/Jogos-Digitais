@@ -19,6 +19,6 @@ MonoBehaviour:
   portalPrefab: {fileID: 161459506853406397, guid: fa237be65574da943812e01c83ea0869, type: 3}
   currentEnemies: 0
   spawnEnemyInterval: 1
-  waveAmount: 5
+  waveAmount: 1
   currentWave: 0
   currentEnemiesWaveAmount: 0
