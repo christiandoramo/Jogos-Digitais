@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Bullet
   - Portal
+  - Ground
   layers:
   - Default
   - TransparentFX

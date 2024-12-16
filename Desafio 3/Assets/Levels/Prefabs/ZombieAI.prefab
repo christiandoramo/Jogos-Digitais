@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   moveSpeed: 3
-  player: {fileID: 0}
+  player: {fileID: 8698597275452236317, guid: 8e24e0b4ffa234d4aa311ed985a89f98, type: 3}
   enemyBody: {fileID: 3832884592829521532}
   rb2: {fileID: 0}
   animator: {fileID: 0}
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrounded: 0
+  floorTag: 
   layerMask:
     serializedVersion: 2
     m_Bits: 256

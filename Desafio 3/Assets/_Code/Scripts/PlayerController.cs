@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 8f;
     public float jumpForce = 8f;
     public float bulletDmg = 25f;
-
     public struct Collectables
     {
         public int seeds;
@@ -22,6 +21,8 @@ public class PlayerController : MonoBehaviour
         public int stars;
         public int jumps;
         public int dmgs;
+        public bool isStarBoostActivated;
+
         public Collectables(int seeds, int hpregens, int stars, int jumps, int dmgs)
         {
             this.seeds = seeds;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
             this.stars = stars;
             this.jumps = jumps;
             this.dmgs = dmgs;
+            this.isStarBoostActivated = false;
         }
     }
     public Collectables collectables;
@@ -65,10 +67,13 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed;
 
     private bool isArmed;
-    private bool isGrounded;
+    public bool isGrounded;
+    public string floorTag;
+
     private bool isWalking;
     private bool isRunning;
     // private bool isIdling;
+    private bool isStarBoosting;
 
 
     private Material armsMaterial;
@@ -124,7 +129,9 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        HandleStarBoost();
         isGrounded = playerFeet.isGrounded;
+        floorTag = playerFeet.floorTag;
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         bool isShiftPressed = Input.GetKey(KeyCode.LeftShift);
         bool isJumpKeyDown = Input.GetButtonDown("Jump");
@@ -285,5 +292,49 @@ public class PlayerController : MonoBehaviour
             material.shader = defaultShader;
             yield return new WaitForSeconds(interval / 2);
         }
+    }
+
+    private IEnumerator StarFlashRoutine()
+    {
+        if (!collectables.isStarBoostActivated) yield break;
+        float interval = 0.33f;
+        Material originalMaterial = material;
+
+        Material m1 = new(flashShader);
+
+        material = m1;
+        armsMaterial = m1;
+        while (collectables.isStarBoostActivated)
+        {
+            material.color = Color.yellow;
+            yield return new WaitForSeconds(interval);
+            material.color = Color.blue;
+            yield return new WaitForSeconds(interval);
+        }
+        material.color = Color.white;
+        armsMaterial = originalMaterial;
+        material = originalMaterial;
+
+        armsMaterial.shader = defaultShader;
+        material.shader = defaultShader;
+
+    }
+
+    private void HandleStarBoost()
+    {
+        float interval = 10f;
+        if (collectables.isStarBoostActivated && !isStarBoosting)
+        {
+            isStarBoosting = true;
+            StartCoroutine(StarFlashRoutine());
+            StartCoroutine(HandleDectivateStarBoost(interval));
+        }
+    }
+
+    private IEnumerator HandleDectivateStarBoost(float interval)
+    {
+        yield return new WaitForSeconds(interval);
+        collectables.isStarBoostActivated = false;
+        isStarBoosting = false;
     }
 }

@@ -9,6 +9,8 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public WaveManager waveManager;
+    public CollectableManager collectableManager;
+
     [SerializeField] Light2D globalIlumination;
 
     public TextMeshProUGUI enemiesCounterUI;
@@ -19,12 +21,13 @@ public class GameManager : MonoBehaviour
     public GameObject victoryPanel;
 
     public static GameManager instance;
+
     public RectTransform enemyImage;
     float rotationAngle;
 
     private bool nightHasStarted;
 
-    private float dayTimer = 0f;
+    public float dayTimer = 0f;
     public float sunnyTime = 10f;
     private float colorTimeReference = 0f;
     private Color bgNightColor;
@@ -33,23 +36,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public PlayerController playerController;
-
-
-
-    // código só roda ao carregar o script
-    //void Awake()
-    //{
-    //    // GameManager é único na cena
-    //    if (instance == null)
-    //    {
-    //        instance = this; // definindo a instancia do objeto como estática para ser acessado como um
-    //                         // singleton em outros arquivos
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
 
     void Start()
     {
@@ -77,8 +63,8 @@ public class GameManager : MonoBehaviour
         portalComponents = waveManager.portals.Select((portal) => portal.GetComponent<Portal>()).ToList<Portal>();
 
 
-        if (ColorUtility.TryParseHtmlString("#FF5F5F", out bgNightColor))
-
+        if (ColorUtility.TryParseHtmlString("#FF5F00", out bgNightColor))
+            // #FF5F5F - anterior
             if (victoryPanel != null)
                 victoryPanel.SetActive(false); // desativa menu de parabens
     }
@@ -88,7 +74,7 @@ public class GameManager : MonoBehaviour
         float second = Time.deltaTime;
         dayTimer += second;
 
-        if (waveManager.currentWave > waveManager.waveAmount && waveManager.currentEnemies <= 0)
+        if (waveManager.currentWave + 1 > waveManager.waveAmount && waveManager.currentEnemies <= 0)
         {
             waveManager.currentWave--; // corrigi o waveManager
             EndGame(); // ganha quando nao tem inimigos e finalizou waves

@@ -63,7 +63,7 @@ public class EnemyController : MonoBehaviour
         if (player == null || hp <= 0 || isColliding || enemyBody == null) return;
         Collider2D colliderPlayer = Physics2D.OverlapBox(enemyBody.transform.position, new Vector2(hitBoxSize.x, hitBoxSize.y), 0f, playerColliderMask);
         Collider2D colliderBullet = Physics2D.OverlapBox(enemyBody.transform.position, new Vector2(hitBoxSize.x, hitBoxSize.y), 0f, hitMask);
-        Debug.Log($"colliderBullet: {colliderBullet}");
+        //Debug.Log($"colliderBullet: {colliderBullet}");
         //float distance = Math.Abs(Vector2.Distance(enemyBody.transform.position, player.position));
         if (colliderPlayer != null)//(distance > stopDistance) 
         {

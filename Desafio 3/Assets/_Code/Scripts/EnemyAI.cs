@@ -30,7 +30,6 @@ public class EnemyAI : MonoBehaviour
     public float jumpModifier = .3f;
     public float jumpCheckOffset = .1f;
     public Feet thisFeet;
-
     public Vector3 hitBoxSize = new(0, 0, 0);
     [SerializeField] LayerMask playerColliderMask;
     [SerializeField] LayerMask bulletColliderMask;
@@ -41,7 +40,9 @@ public class EnemyAI : MonoBehaviour
     //private bool isMoving = true;
     private bool isColliding = false;
     private bool isHitting = false;
+    [SerializeField][Range(1, 100)] int dropProb = 30;
 
+    [Header("Efeitos extra")]
     public Animator animator;
     public CustomAnimator customAnimator;
     public SpriteRenderer spriteRenderer;
@@ -81,12 +82,8 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (hp <= 0)
-        {
-            Die();
-            return;
-        }
-        if (target == null || thisBody == null) return;
+
+        if (target == null || thisBody == null || hp <= 0) return;
         Collider2D colliderPlayer = Physics2D.OverlapBox(thisBody.transform.position, new Vector2(hitBoxSize.x, hitBoxSize.y), 0f, playerColliderMask);
         Collider2D colliderBullet = Physics2D.OverlapBox(thisBody.transform.position, new Vector2(hitBoxSize.x, hitBoxSize.y), 0f, bulletColliderMask);
         if (colliderPlayer != null && !isColliding)
@@ -112,6 +109,11 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        if (hp <= 0)
+        {
+            Die();
+            return;
+        }
         Animate();
     }
 
@@ -142,6 +144,8 @@ public class EnemyAI : MonoBehaviour
     {
         customAnimator.ChangeState(AnimationStates.DYING);
         float duration = customAnimator.GetAnimationDuration(AnimationStates.DYING);
+
+        GameManager.instance.collectableManager.SpawnDrop(dropProb, transform); // 30$ de chance de dropar algo
         Destroy(gameObject, duration + 1f);
     }
     private void OnDestroy()
@@ -152,6 +156,16 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (pc.collectables.isStarBoostActivated)
+        {
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                hp = 0;
+            }
+        }
+    }
 
     IEnumerator HandleCollision()
     {
@@ -167,7 +181,7 @@ public class EnemyAI : MonoBehaviour
 
     IEnumerator HandleBulletHit(Collider2D colliderBullet)
     {
-        int damage = (int) pc.bulletDmg; // dano da bala atual
+        int damage = (int)pc.bulletDmg; // dano da bala atual
         hp -= damage;
 
         Destroy(colliderBullet.gameObject);
@@ -210,8 +224,10 @@ public class EnemyAI : MonoBehaviour
             }
         }
         // Movement
-        rb.AddForce(force);
-        //Debug.Log("rb.linearX: " + rb.linearVelocity.x);
+        rb.AddForce(force); // trocar aki velocidade para ajustar
+
+
+        //Debug.Log("rb.linearX: " + rb.linearVelocity.x);F
 
         // proximo wayPoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);

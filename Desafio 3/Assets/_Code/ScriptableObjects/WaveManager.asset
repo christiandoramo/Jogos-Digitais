@@ -15,11 +15,11 @@ MonoBehaviour:
   nightmareModeProb: 0
   enemiesMultiplier: 2
   portals: []
-  zombiePrefab: {fileID: 1807513051620678273, guid: 882765f0a370e5748ae36ec099cb1a4a, type: 3}
+  zombiePrefab: {fileID: 1807513051620678273, guid: 59f63a8fcc1c87a44a2e1e8cbdfaa7bd, type: 3}
   portalPrefab: {fileID: 161459506853406397, guid: fa237be65574da943812e01c83ea0869, type: 3}
   currentEnemies: 0
   spawnEnemyInterval: 1
-  waveAmount: 1
+  waveAmount: 5
   currentWave: 0
   currentEnemiesWaveAmount: 0
-  playerTransform: {fileID: 8698597275452236317, guid: 8e24e0b4ffa234d4aa311ed985a89f98, type: 3}
+  playerTransform: {fileID: 0}

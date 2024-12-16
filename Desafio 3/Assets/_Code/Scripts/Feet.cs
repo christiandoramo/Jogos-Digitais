@@ -6,6 +6,8 @@ public class Feet : MonoBehaviour
 {
     [Header("Feet variáveis")]
     public bool isGrounded;
+    public string floorTag ="";
+
     [TooltipAttribute("layer de colisão com o Ator (inimigo, player ou npc) para pular")] 
     [SerializeField] private LayerMask layerMask;
     public float feetRadius = 1f;
@@ -24,12 +26,14 @@ public class Feet : MonoBehaviour
         if (!collider)
         {
             isGrounded = false;
+            floorTag = "";
         }
         else
         {
             if(collider.gameObject.layer == LayerMask.NameToLayer("Floor") && !isGrounded)
             {
                 isGrounded = true;
+                floorTag = collider.tag;
             }
         }
     }
