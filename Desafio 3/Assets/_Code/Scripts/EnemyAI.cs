@@ -101,7 +101,8 @@ public class EnemyAI : MonoBehaviour
         if (colliderBullet != null)
         {
             StartCoroutine(FlashRoutine()); // pisca pisca do inimigo
-            StartCoroutine(HandleBulletHit(colliderBullet)); // colisão com bala
+            if (!isHitting)
+                StartCoroutine(HandleBulletHit(colliderBullet)); // colisão com bala
         }
 
 
