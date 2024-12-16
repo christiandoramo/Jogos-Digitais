@@ -35,8 +35,6 @@ public class CustomAnimator : MonoBehaviour {
         {
             if (clip.name == clipName)
             {
-                Debug.Log($"duration for {clipName}: {clip.length}");
-
                 return clip.length;
             }
                 // tempo em segundos

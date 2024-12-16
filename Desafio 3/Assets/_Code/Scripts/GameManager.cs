@@ -69,6 +69,9 @@ public class GameManager : MonoBehaviour
         hpCounterUI.value = playerController.hp;
 
         waveManager = Instantiate(waveManager);
+        waveManager.playerTransform = player.transform.GetChild(0).transform;
+
+
         waveManager.Initialize();
 
         portalComponents = waveManager.portals.Select((portal) => portal.GetComponent<Portal>()).ToList<Portal>();

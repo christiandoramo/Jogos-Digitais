@@ -22,3 +22,4 @@ MonoBehaviour:
   waveAmount: 1
   currentWave: 0
   currentEnemiesWaveAmount: 0
+  playerTransform: {fileID: 8698597275452236317, guid: 8e24e0b4ffa234d4aa311ed985a89f98, type: 3}

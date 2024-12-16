@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
@@ -8,9 +9,31 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
+    // status
     public int hp = 100;
     public float moveSpeed = 8f;
     public float jumpForce = 8f;
+    public float bulletDmg = 25f;
+
+    public struct Collectables
+    {
+        public int seeds;
+        public int hpregens;
+        public int stars;
+        public int jumps;
+        public int dmgs;
+        public Collectables(int seeds, int hpregens, int stars, int jumps, int dmgs)
+        {
+            this.seeds = seeds;
+            this.hpregens = hpregens;
+            this.stars = stars;
+            this.jumps = jumps;
+            this.dmgs = dmgs;
+        }
+    }
+    public Collectables collectables;
+
+    // fisica
     public float fakeGravityThreshold = 2f; // simulando gravidade mais forte ao cair (final do pulo)
 
     public Rigidbody2D rb2;
@@ -48,6 +71,11 @@ public class PlayerController : MonoBehaviour
     // private bool isIdling;
 
 
+    private Material armsMaterial;
+    private Material material;      // Material associado ao SpriteRenderer
+    private Shader defaultShader;  // Shader padrão do material
+    private Shader flashShader;
+
     private struct AnimationStates
     {
         public const string IDLING = "Idling";
@@ -68,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        collectables = new(0, 0, 0, 0, 0);
+
         player = player == null ? this.transform.GetChild(0) : player;
         arms = arms == null ? player.GetChild(0) : arms;
         armsSr = arms.GetComponent<SpriteRenderer>();
@@ -75,6 +105,12 @@ public class PlayerController : MonoBehaviour
 
         customAnimator = player.GetComponent<CustomAnimator>();
         spriteRenderer = player.GetComponent<SpriteRenderer>();
+
+        armsMaterial = armsSr.material;
+        material = spriteRenderer.material; // Obtém o material do SpriteRenderer
+        defaultShader = Shader.Find("Sprites/Default"); // Shader padrão do Unity
+        flashShader = Shader.Find("GUI/Text Shader");  // Shader para "acender"
+
         rb2 = player.GetComponent<Rigidbody2D>();
         customAnimator.ChangeState(AnimationStates.IDLING);
 
@@ -187,15 +223,6 @@ public class PlayerController : MonoBehaviour
         {
             rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce);
         }
-
-        if (rb2.linearVelocity.y < fakeGravityThreshold && rb2.linearVelocity.y > 0.1f * fakeGravityThreshold && !isGrounded && rb2.gravityScale == 1)
-        {
-            rb2.gravityScale = 3; // gravidade falsa - mais dinamico
-        }
-        else if (rb2.linearVelocity.y > 0 && rb2.gravityScale != 1)
-        {
-            rb2.gravityScale = 1;
-        }
     }
 
     private void Shoot(bool isShootPressed)
@@ -235,5 +262,28 @@ public class PlayerController : MonoBehaviour
         mouseDirectionAndAngle.direction = direction;
         mouseDirectionAndAngle.angle = angle;
         return mouseDirectionAndAngle;
+    }
+
+    public void PlayerFlash()
+    {
+        StartCoroutine(FlashRoutine());
+    }
+    private IEnumerator FlashRoutine()
+    {
+        int flashes = 3;          // Quantidade de piscadas
+        float interval = 0.5f;    // Intervalo entre as piscadas (meio segundo)
+
+        for (int i = 0; i < flashes; i++)
+        {
+            // Troca para o shader que "acende"
+            material.shader = flashShader;
+            armsMaterial.shader = flashShader;
+            yield return new WaitForSeconds(interval / 2);
+
+            // Retorna ao shader padrão
+            armsMaterial.shader = defaultShader;
+            material.shader = defaultShader;
+            yield return new WaitForSeconds(interval / 2);
+        }
     }
 }

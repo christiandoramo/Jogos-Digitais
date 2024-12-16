@@ -309,4 +309,4 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
-  feetRadius: 0.21
+  feetRadius: 0.1

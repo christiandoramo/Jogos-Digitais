@@ -14,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - BG
   - Player
   - Floor
   - Sky
@@ -44,14 +44,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Sky
-    uniqueID: 1057577317
+  - name: bgwall
+    uniqueID: 2587536193
     locked: 0
   - name: Floor
     uniqueID: 1340532971
     locked: 0
+  - name: Background
+    uniqueID: 876753663
+    locked: 0
   - name: Foreground
     uniqueID: 1455505233
+    locked: 0
+  - name: Wall
+    uniqueID: 2424890777
     locked: 0
   - name: Player
     uniqueID: 3997188353
@@ -61,6 +67,9 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3221264577
+    locked: 0
+  - name: Collectable
+    uniqueID: 106831569
     locked: 0
   m_RenderingLayers:
   - Default

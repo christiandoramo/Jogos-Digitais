@@ -35,6 +35,8 @@ public class WaveManager : ScriptableObject
     private GameObject portalsEmpty;
     private GameObject enemiesEmpty;
 
+    public Transform playerTransform;
+
     public void Initialize()
     {
         if (enemiesEmpty == null)
@@ -51,24 +53,28 @@ public class WaveManager : ScriptableObject
                 Debug.Log("GameObject.Find(\"Environment\") falhou");
             }
         }
-        if (portalsEmpty == null)
-        {
-            PortalSpawn();
-        }
     }
 
     private void PortalSpawn()
     {
+        if (playerTransform == null) return;
         GameObject map = GameObject.Find("Environment/Map");
         if (map != null)
         {
             portalsEmpty = new GameObject("Portals");
             portalsEmpty.transform.parent = map.transform;
 
-            // limitar de  X=-6 Y=1.5Y ate X=38 Y=1.5Y
-            Vector3 randomPosition = new Vector3((float)Random.Range(6, 38), 1.5f, 0f);
+            // alturas possíveis: -1.2, 2, 6.5, 10.5, 26.5, 30, 35, 38, 44, 54, 79, 83, 97, 101, 106.5, 111
+            float[] possibleHeights = { -1.2f, 2f, 6.5f, 10.5f, 26.5f, 30f, 35f, 38f, 44f, 54f, 79f, 83f, 97f, 101f, 106.5f, 111f };
+            float upHeight = possibleHeights.Where(a => a > playerTransform.position.y).OrderBy(a => a).FirstOrDefault();
+            float downHeight = possibleHeights.Where(a => a <= playerTransform.position.y).OrderByDescending(a => a).FirstOrDefault();
+            float chosenHeight = UnityEngine.Random.Range(0, 2) == 0 ? upHeight : downHeight;
+
+
+            Vector3 randomPosition = new Vector3((float)Random.Range(-8, 2), chosenHeight, 0f);
             GameObject newPortal = Instantiate(portalPrefab, randomPosition, Quaternion.identity);
             Debug.Log("Instanciou em: " + newPortal.transform.position);
+
 
             newPortal.transform.parent = portalsEmpty.transform;
 
@@ -84,13 +90,14 @@ public class WaveManager : ScriptableObject
     {
         currentWave++;
         if (currentWave > waveAmount) return;
+
+        PortalSpawn();
+
         currentEnemiesWaveAmount = previousEnemiesWaveAmount * enemiesMultiplier;
         previousEnemiesWaveAmount = currentEnemiesWaveAmount;
 
         if (Random.Range(0, 2) > 0) currentEnemiesWaveAmount *= enemiesMultiplier;
         currentEnemies = currentEnemiesWaveAmount;
-
-        if (Random.Range(0, 2) > 0) PortalSpawn();
 
         MonoBehaviour behaviour = FindAnyObjectByType<MonoBehaviour>();
         if (behaviour != null)
