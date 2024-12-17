@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f12513184b56046a82ee642a5619b5, type: 3}
+  m_Name: CollectableManagerRESETADO
+  m_EditorClassIdentifier: 
+  pc: {fileID: 0}
+  pcObj: {fileID: 0}
+  animatorControllers:
+  - {fileID: 9100000, guid: b2e98335784c32245a6b1cfb943b7b61, type: 2}
+  - {fileID: 9100000, guid: e470c89395690d149b49f5e6f29f6d39, type: 2}
+  - {fileID: 9100000, guid: f6b35338ff6efb043978648a9c67f947, type: 2}
+  sprites:
+  - {fileID: 6101870128997067697, guid: 0e4a5eab2eb9f2546badadb83f5cee11, type: 3}
+  - {fileID: -2819159017363735665, guid: bf07103d4c1934641932f7b6aeec41d5, type: 3}
+  - {fileID: -2043081902604294830, guid: e745cf87093822143b32f48f519bc2fc, type: 3}
+  jumpAugment: 0.11
+  bulletDmgAugment: 0.3
+  hpRegenAugment: 20
+  seedPrefab: {fileID: 5956267586591150380, guid: 23da50328ae89c94e8080fe1b51e5547, type: 3}
+  starPrefab: {fileID: 5956267586591150380, guid: bf4d587b0c6a6a141b5050d1ba864b67, type: 3}
+  plantPrefab: {fileID: 5956267586591150380, guid: 24cf874bd6c737b4f9c04b73e7876816, type: 3}
+  powerUpPrefabs:
+  - {fileID: 1140539152209020024, guid: 2767dcd00e57cc8449e7608a1949f53b, type: 3}
+  - {fileID: 1140539152209020024, guid: 9f658ac3eac78774884f45fdbf5fad1a, type: 3}
+  - {fileID: 1140539152209020024, guid: 732eb52f81202ae4baec3b00eeb7314c, type: 3}

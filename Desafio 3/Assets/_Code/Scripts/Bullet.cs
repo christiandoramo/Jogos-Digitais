@@ -3,8 +3,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public float bulletSpeed = 10f;
-    public float bulletLifetime = 5f;
+    public float bulletSpeed = 15f;
+    public float bulletLifetime = 2.5f;
     private TrailRenderer trailRenderer; // rastro
     private Transform playerTransform;
 

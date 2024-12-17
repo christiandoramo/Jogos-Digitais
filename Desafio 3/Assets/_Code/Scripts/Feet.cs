@@ -6,9 +6,10 @@ public class Feet : MonoBehaviour
 {
     [Header("Feet variáveis")]
     public bool isGrounded;
-    public string floorTag ="";
+    public string floorTag = "";
+    public Transform groundTransform;
 
-    [TooltipAttribute("layer de colisão com o Ator (inimigo, player ou npc) para pular")] 
+    [TooltipAttribute("layer de colisão com o Ator (inimigo, player ou npc) para pular")]
     [SerializeField] private LayerMask layerMask;
     public float feetRadius = 1f;
 
@@ -22,18 +23,22 @@ public class Feet : MonoBehaviour
     /// </summary>
     private void CheckFloor()
     {
-        Collider2D collider = Physics2D.OverlapCircle(transform.position,feetRadius, layerMask);
+        Collider2D collider = Physics2D.OverlapCircle(transform.position, feetRadius, layerMask);
         if (!collider)
         {
             isGrounded = false;
             floorTag = "";
+            groundTransform = null;
         }
         else
         {
-            if(collider.gameObject.layer == LayerMask.NameToLayer("Floor") && !isGrounded)
+            if (collider.gameObject.layer == LayerMask.NameToLayer("Floor") && !isGrounded)
             {
                 isGrounded = true;
                 floorTag = collider.tag;
+
+                if (collider.CompareTag("Ground")) groundTransform = collider.transform;
+                else groundTransform = null;
             }
         }
     }
@@ -41,6 +46,6 @@ public class Feet : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, feetRadius); 
+        Gizmos.DrawWireSphere(transform.position, feetRadius);
     }
 }

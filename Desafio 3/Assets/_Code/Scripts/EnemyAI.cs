@@ -1,5 +1,6 @@
 using Pathfinding;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -37,10 +38,17 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Lógica do jogo")]
     public int hp = 100;
+    [SerializeField][Range(0.05f, 1000f)] float continuousForceSpeed = 10f;
+    [SerializeField] float moveSpeedMeu = 10f;
+    [SerializeField] float jumpForceMeu = 10f;
     //private bool isMoving = true;
     private bool isColliding = false;
     private bool isHitting = false;
+    private bool hasSpawnedDrop = false; // Garante que o drop só será spawnado uma vez.
     [SerializeField][Range(1, 100)] int dropProb = 30;
+
+
+
 
     [Header("Efeitos extra")]
     public Animator animator;
@@ -86,26 +94,24 @@ public class EnemyAI : MonoBehaviour
         if (target == null || thisBody == null || hp <= 0) return;
         Collider2D colliderPlayer = Physics2D.OverlapBox(thisBody.transform.position, new Vector2(hitBoxSize.x, hitBoxSize.y), 0f, playerColliderMask);
         Collider2D colliderBullet = Physics2D.OverlapBox(thisBody.transform.position, new Vector2(hitBoxSize.x, hitBoxSize.y), 0f, bulletColliderMask);
-        if (colliderPlayer != null && !isColliding)
+        if (colliderPlayer != null && !isColliding && !pc.collectables.isStarBoostActivated)
         {
-            followEnabled = false;
             StartCoroutine(HandleCollision());// colisão com player
-            target.gameObject.GetComponent<PlayerController>().PlayerFlash(); // flash pisca pisca do player
+            target.GetComponentInParent<PlayerController>().PlayerFlash(); // flash pisca pisca do player
+        }
+        if (colliderBullet != null)
+        {
+            if (!isHitting)
+            {
+                StartCoroutine(FlashRoutine()); // pisca pisca do inimigo
+                StartCoroutine(HandleBulletHit(colliderBullet)); // colisão com bala
+            }
         }
 
-        if (TargetInDistance() && followEnabled && !isColliding)
+        if (TargetInDistance() && followEnabled)
         {
             PathFollow();
         }
-
-        if (colliderBullet != null)
-        {
-            StartCoroutine(FlashRoutine()); // pisca pisca do inimigo
-            if (!isHitting)
-                StartCoroutine(HandleBulletHit(colliderBullet)); // colisão com bala
-        }
-
-
     }
 
     void Update()
@@ -123,32 +129,35 @@ public class EnemyAI : MonoBehaviour
         if (hp <= 0) return;
         if (rb != null && spriteRenderer != null)
         {
-            if (customAnimator.currentState != AnimationStates.RUNNING && Mathf.Abs(rb.linearVelocity.x) > 0.05f)
+            if (customAnimator.currentState != AnimationStates.RUNNING && Mathf.Abs(rb.linearVelocity.x) > 0.3f)
             {
                 customAnimator.ChangeState(AnimationStates.RUNNING);
             }
-            else if (customAnimator.currentState != AnimationStates.IDLING && Mathf.Abs(rb.linearVelocity.x) < 0.05f)
+            else if (customAnimator.currentState != AnimationStates.IDLING && Mathf.Abs(rb.linearVelocity.x) < 0.3f)
             {
                 customAnimator.ChangeState(AnimationStates.IDLING);
             }
 
-            if (rb.linearVelocity.x < -0.05f && !spriteRenderer.flipX)
+            if (rb.linearVelocity.x < -0.3f && !spriteRenderer.flipX)
                 spriteRenderer.flipX = true;
-            else if (rb.linearVelocity.x > 0.05f && spriteRenderer.flipX)
+            else if (rb.linearVelocity.x > 0.3f && spriteRenderer.flipX)
                 spriteRenderer.flipX = false;
         }
     }
 
-    // Lógica do jogo
-
     private void Die()
     {
+        if (!hasSpawnedDrop)
+        {
+            hasSpawnedDrop = true;
+
+            GameManager.instance.collectableManager.SpawnDrop(dropProb, thisBody.transform);
+        }
         customAnimator.ChangeState(AnimationStates.DYING);
         float duration = customAnimator.GetAnimationDuration(AnimationStates.DYING);
-
-        GameManager.instance.collectableManager.SpawnDrop(dropProb, transform); // 30$ de chance de dropar algo
         Destroy(gameObject, duration + 1f);
     }
+
     private void OnDestroy()
     {
         if (GameManager.instance != null)
@@ -170,18 +179,24 @@ public class EnemyAI : MonoBehaviour
 
     IEnumerator HandleCollision()
     {
+        if (pc.collectables.isStarBoostActivated)
+        {
+            hp = 0;
+            yield break;
+        }
+
         PlayerController playerController = target.GetComponentInParent<PlayerController>();
-        playerController.hp -= 20; // da 50 de dano ao colidir com o player
+        playerController.hp -= 10; // da 50 de dano ao colidir com o player
         isColliding = true;
         //rb.linearVelocity = Vector2.zero;
         //isMoving = false;
         yield return new WaitForSeconds(1.5f);
         isColliding = false;
-        followEnabled = true;
     }
 
     IEnumerator HandleBulletHit(Collider2D colliderBullet)
     {
+        isHitting = true;
         int damage = (int)pc.bulletDmg; // dano da bala atual
         hp -= damage;
 
@@ -190,11 +205,7 @@ public class EnemyAI : MonoBehaviour
         {
             Die();
         }
-
-        isHitting = true;
-        //rb.linearVelocity = Vector2.zero;
-        //isMoving = false;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.3f);
         isHitting = false;
     }
 
@@ -221,14 +232,15 @@ public class EnemyAI : MonoBehaviour
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
-                rb.AddForce(Vector2.up * speed * jumpModifier);
+                //rb.AddForce(Vector2.up * speed * jumpModifier);
+                rb.AddForce(Vector2.up * jumpForceMeu * Time.deltaTime, ForceMode2D.Impulse); // coloquei minha versão
+
             }
         }
         // Movement
-        rb.AddForce(force); // trocar aki velocidade para ajustar
-
-
-        //Debug.Log("rb.linearX: " + rb.linearVelocity.x);F
+        // rb.AddForce(force); // trocar aki velocidade para ajustar
+        rb.linearVelocityX = direction.x * moveSpeedMeu * Time.deltaTime; // coloquei minha versão
+        rb.AddForce(Vector2.right * direction.x * moveSpeedMeu * continuousForceSpeed * Time.deltaTime, ForceMode2D.Force);
 
         // proximo wayPoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -236,16 +248,6 @@ public class EnemyAI : MonoBehaviour
         {
             currentWaypoint++;
         }
-
-        // Gizmo do path na tela
-        //if (directionLookEnabled)
-        //{
-        //    if (rb.linearVelocity.x > 0.05f)
-        //        thisBody.transform.localScale = new Vector3(-1f * Mathf.Abs(thisBody.transform.localScale.x), transform.localScale.y, thisBody.transform.localScale.z);
-        //    else if (rb.linearVelocity.x < -0.05f)
-        //        thisBody.transform.localScale = new Vector3(Mathf.Abs(thisBody.transform.localScale.x), thisBody.transform.localScale.y, thisBody.transform.localScale.z);
-
-        //}
     }
 
     private bool TargetInDistance()

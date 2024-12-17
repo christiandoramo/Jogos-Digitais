@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using static CollectableManager;
 
 [CreateAssetMenu(fileName = "CollectableManager", menuName = "ScriptableObjects/CollectableManager", order = 2)]
 public class CollectableManager : ScriptableObject
@@ -11,7 +13,7 @@ public class CollectableManager : ScriptableObject
     [SerializeField]
     RuntimeAnimatorController[] animatorControllers;
     [SerializeField] Sprite[] sprites;
-    [SerializeField] int rollete;
+    private int rollete;
 
     [SerializeField]
     [Tooltip("Aumento do pulo")]
@@ -48,7 +50,7 @@ public class CollectableManager : ScriptableObject
         starPrefab.GetComponent<DropController>().collectableType = CollectableType.STAR;
 
         pcObj = GameObject.FindWithTag("Player");
-        pc = pcObj.GetComponent<PlayerController>();
+        pc = pcObj.GetComponentInParent<PlayerController>();
     }
     public enum CollectableType
     {
@@ -73,6 +75,8 @@ public class CollectableManager : ScriptableObject
 
     public void CultiveSeed(Transform ground) // plantar
     {
+        Debug.Log(pc.floorTag);
+        if (pc.collectables.seeds <= 0) return;
         if (!pc.isGrounded) return; // deve estar no chão
         if (pc.floorTag != "Ground") return; //deve estar colidindo com um chão plantável
         PlantInstance hasInSameGround = plantInstances.Where((p) => p.objInstance.transform.position.x == ground.transform.position.x).FirstOrDefault();
@@ -85,21 +89,28 @@ public class CollectableManager : ScriptableObject
         CultivableType cultivableType = enumValues[Random.Range(0, enumValues.Length)];
 
         PlantController plantController = instance.GetComponent<PlantController>();
+        Debug.Log("plantController: " + plantController);
+        Debug.Log("cultivableType: " + cultivableType.HumanName());
+
         plantController.cultivableType = cultivableType;
 
         plantController.spriteRenderer.sprite = sprites.Where(spr => spr.name == $"{CultivableTypeName(cultivableType)}_0").FirstOrDefault(); // nomes devem ser iguais
-
         plantController.animator.runtimeAnimatorController = animatorControllers.Where(anim => anim.name == CultivableTypeName(cultivableType)).FirstOrDefault();
-        plantController.collectableManager = this;
 
-        plantController.powerUpPrefab = powerUpPrefabs.Where(p => p.name + "Plant" == CultivableTypeName(cultivableType)).FirstOrDefault();
+        powerUpPrefabs.ForEach(p => Debug.Log("p.name: " + p.name + "Plant")); // teste de nome dos powerUps
+
+        plantController.powerUpPrefab = powerUpPrefabs.Where(p => p.name + "Plant" == "PowerUp" + CultivableTypeName(cultivableType)).FirstOrDefault();
 
         plantInstances.Add(new PlantInstance(instance, plantController));
     }
-    public void BornPlantPowerUp(Vector3 t, GameObject p, Quaternion r)
+    public void BornPlantPowerUp(CultivableType ct, Vector3 t, GameObject p, Quaternion r) // posição de spawn, prefab de powerUp, quaternion
     {
         GameObject instance = Instantiate(p, t, r);
         PowerUpController puc = instance.GetComponent<PowerUpController>();
+
+        puc.powerUpType = ConvertCultivateTypeToPowerUpType(ct);
+
+
         PowerUpInstance pui = new PowerUpInstance(instance, puc);
         powerUpInstances.Add(pui);
         plantInstances = plantInstances
@@ -115,11 +126,11 @@ public class CollectableManager : ScriptableObject
         if (!drop) return;
 
         rollete = Random.Range(0, 100);
-        if (rollete < 5) // star drop
+        if (rollete < 20) // star drop
         {
             Instantiate(starPrefab, transf.position, Quaternion.identity);
         }
-        else if (rollete < 34)
+        else
         {
             Instantiate(seedPrefab, transf.position, Quaternion.identity);
         }  // seed
@@ -150,6 +161,45 @@ public class CollectableManager : ScriptableObject
                 break;
         }
         return returnString;
+    }
+    public PowerUpType ConvertCultivateTypeToPowerUpType(CultivableType type)
+    {
+        PowerUpType returnType = PowerUpType.HPREGEN;
+        switch (type)
+        {
+            case CultivableType.HPREGEN:
+                returnType = PowerUpType.HPREGEN;
+                break;
+            case CultivableType.JUMP:
+                returnType = PowerUpType.JUMP;
+                break;
+            case CultivableType.DMG:
+                returnType = PowerUpType.DMG;
+                break;
+            default:
+                break;
+        }
+        return returnType;
+    }
+
+    public CollectableType ConvertPowerUpTypeToCollectableType(PowerUpType type)
+    {
+        CollectableType returnType = CollectableType.HPREGEN;
+        switch (type)
+        {
+            case PowerUpType.HPREGEN:
+                returnType = CollectableType.HPREGEN;
+                break;
+            case PowerUpType.JUMP:
+                returnType = CollectableType.JUMP;
+                break;
+            case PowerUpType.DMG:
+                returnType = CollectableType.DMG;
+                break;
+            default:
+                break;
+        }
+        return returnType;
     }
 
     private string PowerUpTypeName(PowerUpType type)
@@ -259,6 +309,11 @@ public class CollectableManager : ScriptableObject
 
     public void Collect(CollectableType type) // utilizável direto do inventário ou coletável usável
     {
+        Debug.Log("Coletou: " + type.HumanName());
+        Debug.Log("pc: " + pc.ToString());
+        Debug.Log("pc.collectables: " + pc.collectables.ToString());
+        Debug.Log("pc.collectables.seeds: " + pc.collectables.seeds.ToString());
+
         switch (type)
         {
             case CollectableType.SEED:
@@ -286,17 +341,24 @@ public class CollectableManager : ScriptableObject
         if (pc.collectables.dmgs <= 0) return;
         pc.bulletDmg *= 1 + bulletDmgAugment;
         pc.collectables.dmgs--;
+        Debug.Log("DMG novo: " + pc.bulletDmg);
     }
     private void ActivateJumpPowerUp()
     {
         if (pc.collectables.jumps <= 0) return;
         pc.jumpForce *= 1 + jumpAugment;
         pc.collectables.jumps--;
+        Debug.Log("Jump novo: " + pc.jumpForce);
+
     }
     private void ActivateHpRegenPowerUp()
     {
+        Debug.Log("hp Entrou");
         if (pc.collectables.hpregens <= 0) return;
-        pc.hp += hpRegenAugment;
+        pc.maxHp += hpRegenAugment; // aumento de hp
+        pc.hp = pc.maxHp; // cura total
+        Debug.Log("hp Passou");
+        Debug.Log("HP novo: " + pc.hp);
         pc.collectables.hpregens--;
     }
     private void ActivateStarBoost()
@@ -305,5 +367,6 @@ public class CollectableManager : ScriptableObject
         if (pc.collectables.isStarBoostActivated) return;
         pc.collectables.stars--;
         pc.collectables.isStarBoostActivated = true;
+        pc.HandleStarBoost();
     }
 }

@@ -54,14 +54,17 @@ TagManager:
   - name: Background
     uniqueID: 876753663
     locked: 0
-  - name: Foreground
-    uniqueID: 1455505233
-    locked: 0
   - name: Wall
     uniqueID: 2424890777
     locked: 0
+  - name: Foreground
+    uniqueID: 1455505233
+    locked: 0
   - name: Player
     uniqueID: 3997188353
+    locked: 0
+  - name: FakeWalls
+    uniqueID: 2488664341
     locked: 0
   - name: Bullet
     uniqueID: 293436059

@@ -10,11 +10,11 @@ using UnityEditor.Experimental.GraphView;
 [CreateAssetMenu(fileName = "WaveManager", menuName = "ScriptableObjects/WaveManager", order = 1)]
 public class WaveManager : ScriptableObject
 {
-
+    [Header("Regras do jogo")]
     [Tooltip("`Probabilidade de uma wave instanciar no modo nightmare")]
     [SerializeField] int nightmareModeProb;
     [Tooltip("Multiplicador de inimigos")]
-    [SerializeField] int enemiesMultiplier = 2;
+    [SerializeField] float enemiesMultiplier = 1.5f;
 
 
     [Tooltip("Lista de portais por onde inimigos instanciam")]
@@ -25,12 +25,12 @@ public class WaveManager : ScriptableObject
     [SerializeField] GameObject portalPrefab;
 
     public int currentEnemies;
-    public float spawnEnemyInterval = 4f;
+    public float spawnEnemyInterval = 2f;
     [Tooltip("Total de waves")]
     public int waveAmount;
     public int currentWave = 0;
     public int currentEnemiesWaveAmount;
-    private int previousEnemiesWaveAmount = 1;
+    public int previousEnemiesWaveAmount = 1;
 
     private GameObject portalsEmpty;
     private GameObject enemiesEmpty;
@@ -93,10 +93,11 @@ public class WaveManager : ScriptableObject
 
         PortalSpawn();
 
-        currentEnemiesWaveAmount = previousEnemiesWaveAmount * enemiesMultiplier;
+        currentEnemiesWaveAmount = (int)(previousEnemiesWaveAmount * enemiesMultiplier) +1;
         previousEnemiesWaveAmount = currentEnemiesWaveAmount;
 
-        if (Random.Range(0, 2) > 0) currentEnemiesWaveAmount *= enemiesMultiplier;
+        // 25% de chance de vir uma wave dobrada
+        if (Random.Range(0, 4) < 1) currentEnemiesWaveAmount = (int)(currentEnemiesWaveAmount * enemiesMultiplier);
         currentEnemies = currentEnemiesWaveAmount;
 
         MonoBehaviour behaviour = FindAnyObjectByType<MonoBehaviour>();

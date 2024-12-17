@@ -17,10 +17,12 @@ public class DropController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Animator animator;
 
-    private int counter = 20;
+    private float counter = 12f;
 
     private Color originalColor;
     bool isFlashing = false;
+    Coroutine cr;
+
     void Start()
     {
         collectableManager = GameManager.instance.collectableManager;
@@ -32,23 +34,25 @@ public class DropController : MonoBehaviour
     }
     void Update()
     {
-        counter += (int)Time.deltaTime;
+        counter -= Time.deltaTime;
         if (counter <= 0)
         {
             collectableManager.powerUpInstances = collectableManager.powerUpInstances
             .Where(a => a.objInstance.transform.position.x != transform.position.x)
             .ToList();
+            if (cr != null)
+            {
+                StopCoroutine(cr);
+                spriteRenderer.color = originalColor;
+            }
             Destroy(gameObject);
         }
-        else if (counter <= 10 && !isFlashing)
+        else if (counter <= 6 && !isFlashing)
         {
             isFlashing = true;
-            StartCoroutine(FlashTransparentRoutine());
+            cr = StartCoroutine(FlashTransparentRoutine());
         }
     }
-
-
-
 
     void FixedUpdate()
     {
@@ -76,6 +80,11 @@ public class DropController : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             collectableManager.Collect(collectableType);
+            if (cr != null)
+            {
+                StopCoroutine(cr);
+                spriteRenderer.color = originalColor;
+            }
             Destroy(gameObject);
         }
     }

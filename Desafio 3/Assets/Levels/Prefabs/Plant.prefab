@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4158421325013162871}
   - component: {fileID: 4189185291483653770}
   - component: {fileID: 686790576433215563}
+  - component: {fileID: 6329947140173804925}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 106831569
-  m_SortingLayer: 9
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -110,3 +111,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6329947140173804925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956267586591150380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34e45bb11cb9de4094dbc67b9a189bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cultivableType: 0
+  collectableManager: {fileID: 0}
+  spriteRenderer: {fileID: 4189185291483653770}
+  animator: {fileID: 686790576433215563}
+  powerUpPrefab: {fileID: 0}

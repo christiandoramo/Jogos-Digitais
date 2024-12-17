@@ -48,16 +48,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   pc: {fileID: 0}
-  activateDistance: 400
-  pathUpdateSeconds: 0.1
+  activateDistance: 50
+  pathUpdateSeconds: 0.5
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
   thisBody: {fileID: 7062735573199184200}
+  moveSpeedMeu: 200
+  jumpForceMeu: 200
   speed: 350
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.8
-  jumpModifier: 0.4
+  jumpModifier: 0.3
   jumpCheckOffset: 0.1
   thisFeet: {fileID: 942712467813864313}
   hitBoxSize: {x: 0.5, y: 1, z: 0}
@@ -68,7 +70,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   hp: 100
-  dropProb: 30
+  dropProb: 100
   animator: {fileID: 7313129149623235259}
   customAnimator: {fileID: 3838023914834641641}
   spriteRenderer: {fileID: 3589800137826416743}
@@ -347,6 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrounded: 0
   floorTag: 
+  groundTransform: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 256

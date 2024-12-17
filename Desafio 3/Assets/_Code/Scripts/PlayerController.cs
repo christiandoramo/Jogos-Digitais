@@ -5,15 +5,22 @@ using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using static CollectableManager;
 
 public class PlayerController : MonoBehaviour
 {
     // status
+    [Header("Lógica do jogo")]
     public int hp = 100;
+    public int maxHp = 100;
     public float moveSpeed = 8f;
     public float jumpForce = 8f;
     public float bulletDmg = 25f;
+    public float stamina = 5;
+    public float maxStamina = 5;
+    private float staminaHasBeenUsedCounter;
     public struct Collectables
     {
         public int seeds;
@@ -35,9 +42,7 @@ public class PlayerController : MonoBehaviour
     }
     public Collectables collectables;
 
-    // fisica
-    public float fakeGravityThreshold = 2f; // simulando gravidade mais forte ao cair (final do pulo)
-
+    [Header("Física e animações")]
     public Rigidbody2D rb2;
     public Transform groundCheck;
     public float groundCheckRadius = 1f;
@@ -57,7 +62,7 @@ public class PlayerController : MonoBehaviour
     public float acceleration = 3f;
 
     public GameObject bulletPrefab;
-    public float shootCooldown = 0.5f;
+    public float shootCooldown = 0.25f;
     public float armedAnimationCooldown = 5f;
 
     private float shootCooldownTimer = 0f;
@@ -67,13 +72,20 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed;
 
     private bool isArmed;
-    public bool isGrounded;
-    public string floorTag;
+    [NonSerialized] public bool isGrounded;
+    [NonSerialized] public string floorTag;
 
     private bool isWalking;
     private bool isRunning;
     // private bool isIdling;
     private bool isStarBoosting;
+
+    private bool alpha1;
+    private bool alpha2;
+    private bool alpha3;
+    private bool alpha4;
+    private bool alpha5;
+
 
 
     private Material armsMaterial;
@@ -98,10 +110,9 @@ public class PlayerController : MonoBehaviour
         public float angle;
         public Vector2 direction;
     }
-
     void Start()
     {
-        collectables = new(0, 0, 0, 0, 0);
+        collectables = new Collectables(0, 0, 0, 0, 0);
 
         player = player == null ? this.transform.GetChild(0) : player;
         arms = arms == null ? player.GetChild(0) : arms;
@@ -129,7 +140,14 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        HandleStarBoost();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (GameManager.instance.isPaused)
+                GameManager.instance.ResumeGame();
+            else
+                GameManager.instance.Pause();
+        }
+        HandleStamina();
         isGrounded = playerFeet.isGrounded;
         floorTag = playerFeet.floorTag;
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -138,11 +156,24 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         bool isShootPressed = Input.GetButton("Fire1"); // down só quado clicka, sem down atira enquanto pressionar
 
+
+        ItemUse();
         Move(horizontalInput, isShiftPressed);
         Jump(isJumpKeyDown);
         Shoot(isShootPressed);
         Animate(horizontalInput != 0);
 
+    }
+
+    void ItemUse()
+    {
+        if (!(alpha1 || alpha3 || alpha3 || alpha4 || alpha5)) return; // se não der nenhum OR é false logo Not false é true e retorna
+
+        if (alpha1) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.SEED);
+        else if (alpha2) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.HPREGEN);
+        else if (alpha3) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.STAR);
+        else if (alpha4) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.JUMP);
+        else if (alpha5) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.DMG);
     }
     void Animate(bool isMoving)
     {
@@ -205,11 +236,13 @@ public class PlayerController : MonoBehaviour
     }
     void Move(float horizontalInput, bool isShiftPressed)
     {
-        if (horizontalInput != 0 && isShiftPressed)
+        if (horizontalInput != 0 && isShiftPressed && stamina > 0)
         {
             targetSpeed = runSpeed;
             isRunning = true;
             isWalking = false;
+            stamina -= Time.deltaTime;
+            staminaHasBeenUsedCounter = 2f; // 2 segundos sem usar para encher
         }
         else if (horizontalInput != 0)
         {
@@ -296,16 +329,17 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator StarFlashRoutine()
     {
-        if (!collectables.isStarBoostActivated) yield break;
-        float interval = 0.33f;
+        //if (!collectables.isStarBoostActivated) yield break;
+        float interval = 0.3f;
         Material originalMaterial = material;
 
         Material m1 = new(flashShader);
-
+        m1.shader = flashShader;
         material = m1;
         armsMaterial = m1;
         while (collectables.isStarBoostActivated)
         {
+            Debug.Log("trocando");
             material.color = Color.yellow;
             yield return new WaitForSeconds(interval);
             material.color = Color.blue;
@@ -320,11 +354,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void HandleStarBoost()
+    public void HandleStarBoost()
     {
-        float interval = 10f;
+        Debug.Log("Entrou 1");
         if (collectables.isStarBoostActivated && !isStarBoosting)
         {
+            Debug.Log("Entrou 2");
+            float interval = 10f;
             isStarBoosting = true;
             StartCoroutine(StarFlashRoutine());
             StartCoroutine(HandleDectivateStarBoost(interval));
@@ -337,4 +373,50 @@ public class PlayerController : MonoBehaviour
         collectables.isStarBoostActivated = false;
         isStarBoosting = false;
     }
+
+    private void HandleStamina()
+    {
+        Debug.Log("staminaHasBeenUsedCounter: " + staminaHasBeenUsedCounter);
+        if (stamina < maxStamina && staminaHasBeenUsedCounter <= 0)
+            while (staminaHasBeenUsedCounter < 2f && stamina < maxStamina)
+            {
+                stamina += Time.deltaTime; // fica aumentando a cada frame da unity em 0.0000... float dando 1 a cada seg
+                if (stamina >= maxStamina)
+                {
+                    stamina = maxStamina;
+                    break;
+                }
+            }
+        else if (staminaHasBeenUsedCounter >= 0 && staminaHasBeenUsedCounter <= 2f) // não foi usada em 2 segundos
+        {
+            staminaHasBeenUsedCounter -= Time.deltaTime;
+            if (staminaHasBeenUsedCounter <= 0f)
+                staminaHasBeenUsedCounter = 0f;
+        }
+    }
+
+
+    // nova input da unity
+    #region Input Methods
+    public void OnAlpha1Press(InputAction.CallbackContext ctx)
+    {
+        alpha1 = ctx.ReadValueAsButton();
+    }
+    public void OnAlpha2Press(InputAction.CallbackContext ctx)
+    {
+        alpha2 = ctx.ReadValueAsButton();
+    }
+    public void OnAlpha3Press(InputAction.CallbackContext ctx)
+    {
+        alpha3 = ctx.ReadValueAsButton();
+    }
+    public void OnAlpha4Press(InputAction.CallbackContext ctx)
+    {
+        alpha4 = ctx.ReadValueAsButton();
+    }
+    public void OnAlpha5Press(InputAction.CallbackContext ctx)
+    {
+        alpha5 = ctx.ReadValueAsButton();//ctx.ReadValueAsButton();
+    }
+    #endregion
 }

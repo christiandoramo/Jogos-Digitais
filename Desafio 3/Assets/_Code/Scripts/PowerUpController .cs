@@ -8,13 +8,17 @@ using static CollectableManager;
 
 public class PowerUpController : MonoBehaviour
 {
-    [NonSerialized] public PowerUpType powerUpType;
+    public PowerUpType powerUpType;
     public CollectableManager collectableManager;
-
     public SpriteRenderer spriteRenderer;
-    public Animator animator;
+    private float counter = 12f;
 
-    private int counter = 20;
+    [SerializeField] float floatSpeed = 1f; // Velocidade da flutuação
+    [SerializeField] float floatAmplitude = 0.5f; // Amplitude da flutuação
+    Coroutine cr;
+
+    private Vector3 startPosition;
+
 
     private Color originalColor;
     bool isFlashing = false;
@@ -22,24 +26,36 @@ public class PowerUpController : MonoBehaviour
     {
         collectableManager = GameManager.instance.collectableManager;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
         originalColor = spriteRenderer.color;
+        startPosition = transform.position;
     }
     void Update()
     {
-        counter += (int)Time.deltaTime;
+        counter -= Time.deltaTime;
         if (counter <= 0)
         {
             collectableManager.powerUpInstances = collectableManager.powerUpInstances
             .Where(a => a.objInstance.transform.position.x != transform.position.x)
             .ToList();
+            if (cr != null)
+            {
+                StopCoroutine(cr);
+                spriteRenderer.color = originalColor;
+            }
             Destroy(gameObject);
         }
-        else if (counter <= 10 && !isFlashing)
+        else if (counter <= 6 && !isFlashing)
         {
             isFlashing = true;
-            StartCoroutine(FlashTransparentRoutine());
+            cr = StartCoroutine(FlashTransparentRoutine());
         }
+    }
+
+    void FixedUpdate()
+    {
+        // Calcula a nova posição usando uma função senoidal para flutuação
+        float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
+        transform.position = new Vector3(startPosition.x, newY, startPosition.z);
     }
     private IEnumerator FlashTransparentRoutine()
     {
@@ -62,7 +78,12 @@ public class PowerUpController : MonoBehaviour
         if (collider == null) return;
         if (collider.CompareTag("Player"))
         {
-            collectableManager.PowerUpCollect(this.powerUpType);
+            collectableManager.Collect(collectableManager.ConvertPowerUpTypeToCollectableType(powerUpType));
+            if (cr != null)
+            {
+                StopCoroutine(cr);
+                spriteRenderer.color = originalColor;
+            }
             Destroy(gameObject);
         }
     }
