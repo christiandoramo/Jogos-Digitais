@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WaveManager
   m_EditorClassIdentifier: 
   nightmareModeProb: 0
-  enemiesMultiplier: 1.5
+  enemiesMultiplier: 1.25
   portals: []
   zombiePrefab: {fileID: 1807513051620678273, guid: 59f63a8fcc1c87a44a2e1e8cbdfaa7bd, type: 3}
   portalPrefab: {fileID: 161459506853406397, guid: fa237be65574da943812e01c83ea0869, type: 3}

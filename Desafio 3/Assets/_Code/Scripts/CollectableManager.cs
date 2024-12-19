@@ -42,7 +42,6 @@ public class CollectableManager : ScriptableObject
 
     [SerializeField]
     List<GameObject> powerUpPrefabs;
-    public List<PowerUpInstance> powerUpInstances = new();
 
     public void Initialize()
     {
@@ -75,7 +74,6 @@ public class CollectableManager : ScriptableObject
 
     public void CultiveSeed(Transform ground) // plantar
     {
-        Debug.Log(pc.floorTag);
         if (pc.collectables.seeds <= 0) return;
         if (!pc.isGrounded) return; // deve estar no chão
         if (pc.floorTag != "Ground") return; //deve estar colidindo com um chão plantável
@@ -83,21 +81,20 @@ public class CollectableManager : ScriptableObject
         if (hasInSameGround != null) return; // se ja tem no mesmo chão não gunciona
         pc.collectables.seeds--;
 
-        GameObject instance = Instantiate(plantPrefab, ground.transform.position, Quaternion.identity);
+        // Vector.up para ajustar para nascer em cima
+        GameObject instance = Instantiate(plantPrefab, ground.transform.position + Vector3.up * .5f, Quaternion.identity);
 
         CultivableType[] enumValues = (CultivableType[])System.Enum.GetValues(typeof(CultivableType));
         CultivableType cultivableType = enumValues[Random.Range(0, enumValues.Length)];
 
         PlantController plantController = instance.GetComponent<PlantController>();
-        Debug.Log("plantController: " + plantController);
-        Debug.Log("cultivableType: " + cultivableType.HumanName());
 
         plantController.cultivableType = cultivableType;
 
         plantController.spriteRenderer.sprite = sprites.Where(spr => spr.name == $"{CultivableTypeName(cultivableType)}_0").FirstOrDefault(); // nomes devem ser iguais
         plantController.animator.runtimeAnimatorController = animatorControllers.Where(anim => anim.name == CultivableTypeName(cultivableType)).FirstOrDefault();
 
-        powerUpPrefabs.ForEach(p => Debug.Log("p.name: " + p.name + "Plant")); // teste de nome dos powerUps
+        //powerUpPrefabs.ForEach(p => Debug.Log("p.name: " + p.name + "Plant")); // teste de nome dos powerUps
 
         plantController.powerUpPrefab = powerUpPrefabs.Where(p => p.name + "Plant" == "PowerUp" + CultivableTypeName(cultivableType)).FirstOrDefault();
 
@@ -109,10 +106,7 @@ public class CollectableManager : ScriptableObject
         PowerUpController puc = instance.GetComponent<PowerUpController>();
 
         puc.powerUpType = ConvertCultivateTypeToPowerUpType(ct);
-
-
         PowerUpInstance pui = new PowerUpInstance(instance, puc);
-        powerUpInstances.Add(pui);
         plantInstances = plantInstances
         .Where(plant => plant.objInstance.transform.position.x != t.x)
         .ToList();
@@ -126,7 +120,7 @@ public class CollectableManager : ScriptableObject
         if (!drop) return;
 
         rollete = Random.Range(0, 100);
-        if (rollete < 20) // star drop
+        if (rollete < 15) // star drop
         {
             Instantiate(starPrefab, transf.position, Quaternion.identity);
         }
@@ -347,6 +341,7 @@ public class CollectableManager : ScriptableObject
     {
         if (pc.collectables.jumps <= 0) return;
         pc.jumpForce *= 1 + jumpAugment;
+        pc.superJump = true;
         pc.collectables.jumps--;
         Debug.Log("Jump novo: " + pc.jumpForce);
 
@@ -364,9 +359,9 @@ public class CollectableManager : ScriptableObject
     private void ActivateStarBoost()
     {
         if (pc.collectables.stars <= 0) return;
-        if (pc.collectables.isStarBoostActivated) return;
+        if (pc.isStarBoostActivated) return;
         pc.collectables.stars--;
-        pc.collectables.isStarBoostActivated = true;
+        pc.isStarBoostActivated = true;
         pc.HandleStarBoost();
     }
 }

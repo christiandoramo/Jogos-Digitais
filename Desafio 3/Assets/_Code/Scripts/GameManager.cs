@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         if (waveManager.currentWave + 1 > waveManager.waveAmount && waveManager.currentEnemies <= 0)
         {
             waveManager.currentWave--; // corrigi o waveManager
-            GameOver(); // ganha quando nao tem inimigos e finalizou waves
+            WinGame(); // ganha quando nao tem inimigos e finalizou waves
         }
         else if (dayTimer <= sunnyTime && nightHasStarted)
         {

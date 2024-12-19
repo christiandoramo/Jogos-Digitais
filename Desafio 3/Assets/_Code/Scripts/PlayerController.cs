@@ -15,12 +15,14 @@ public class PlayerController : MonoBehaviour
     [Header("Lógica do jogo")]
     public int hp = 100;
     public int maxHp = 100;
-    public float moveSpeed = 8f;
-    public float jumpForce = 8f;
+    public float moveSpeed = 7f;
+    public float jumpForce = 5f;
     public float bulletDmg = 25f;
-    public float stamina = 5;
+    public float stamina = 0;
     public float maxStamina = 5;
     private float staminaHasBeenUsedCounter;
+    public bool isStarBoostActivated;
+    public bool superJump = false;
     public struct Collectables
     {
         public int seeds;
@@ -28,7 +30,6 @@ public class PlayerController : MonoBehaviour
         public int stars;
         public int jumps;
         public int dmgs;
-        public bool isStarBoostActivated;
 
         public Collectables(int seeds, int hpregens, int stars, int jumps, int dmgs)
         {
@@ -37,7 +38,6 @@ public class PlayerController : MonoBehaviour
             this.stars = stars;
             this.jumps = jumps;
             this.dmgs = dmgs;
-            this.isStarBoostActivated = false;
         }
     }
     public Collectables collectables;
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
     public float acceleration = 3f;
 
     public GameObject bulletPrefab;
-    public float shootCooldown = 0.25f;
+    public float shootCooldown = 0.3f;
     public float armedAnimationCooldown = 5f;
 
     private float shootCooldownTimer = 0f;
@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour
     private Material material;      // Material associado ao SpriteRenderer
     private Shader defaultShader;  // Shader padrão do material
     private Shader flashShader;
+    private Coroutine flashRoutine;
 
     private struct AnimationStates
     {
@@ -167,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
     void ItemUse()
     {
-        if (!(alpha1 || alpha3 || alpha3 || alpha4 || alpha5)) return; // se não der nenhum OR é false logo Not false é true e retorna
+        if (!(alpha1 || alpha2 || alpha3 || alpha4 || alpha5)) return; // se não der nenhum OR é false logo Not false é true e retorna
 
         if (alpha1) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.SEED);
         else if (alpha2) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.HPREGEN);
@@ -261,7 +262,14 @@ public class PlayerController : MonoBehaviour
     {
         if (isJumpPressed && isGrounded)
         {
-            rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce);
+            if (!superJump)
+            {
+                rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce);
+            }
+            else
+            {
+                rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce + 100f);
+            }
         }
     }
 
@@ -306,7 +314,8 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerFlash()
     {
-        StartCoroutine(FlashRoutine());
+        if (flashRoutine == null)
+            flashRoutine = StartCoroutine(FlashRoutine());
     }
     private IEnumerator FlashRoutine()
     {
@@ -316,61 +325,72 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < flashes; i++)
         {
             // Troca para o shader que "acende"
+            material.color = Color.white;
             material.shader = flashShader;
             armsMaterial.shader = flashShader;
             yield return new WaitForSeconds(interval / 2);
 
             // Retorna ao shader padrão
+            material.color = Color.white;
             armsMaterial.shader = defaultShader;
             material.shader = defaultShader;
             yield return new WaitForSeconds(interval / 2);
         }
+        flashRoutine = null;
     }
 
-    private IEnumerator StarFlashRoutine()
+    private IEnumerator StarBoostFlashRoutine()
     {
-        //if (!collectables.isStarBoostActivated) yield break;
+        //if (!isStarBoostActivated) yield break;
         float interval = 0.3f;
-        Material originalMaterial = material;
 
-        Material m1 = new(flashShader);
-        m1.shader = flashShader;
-        material = m1;
-        armsMaterial = m1;
-        while (collectables.isStarBoostActivated)
+        material.shader = flashShader;
+        armsMaterial.shader = flashShader;
+
+        while (isStarBoostActivated)
         {
-            Debug.Log("trocando");
             material.color = Color.yellow;
             yield return new WaitForSeconds(interval);
             material.color = Color.blue;
             yield return new WaitForSeconds(interval);
         }
-        material.color = Color.white;
-        armsMaterial = originalMaterial;
-        material = originalMaterial;
-
         armsMaterial.shader = defaultShader;
         material.shader = defaultShader;
-
+        material.color = Color.white;
+        armsMaterial.color = Color.white;
     }
 
     public void HandleStarBoost()
     {
-        Debug.Log("Entrou 1");
-        if (collectables.isStarBoostActivated && !isStarBoosting)
+        if (isStarBoostActivated && !isStarBoosting)
         {
-            Debug.Log("Entrou 2");
+            Debug.Log("Positivo 2");
             float interval = 10f;
             isStarBoosting = true;
-            StartCoroutine(StarFlashRoutine());
+
+            if (flashRoutine != null)
+            {
+                StopCoroutine(flashRoutine); // parando rotina do flash se ainda estiver rodando
+                armsMaterial.shader = defaultShader;
+                material.shader = defaultShader;
+                material.color = Color.white;
+                armsMaterial.color = Color.white;
+            }
+            StartCoroutine(StarBoostFlashRoutine());
             StartCoroutine(HandleDectivateStarBoost(interval));
+        }
+        else
+        {
+            Debug.Log("Negativo 2");
         }
     }
 
     private IEnumerator HandleDectivateStarBoost(float interval)
     {
+        Debug.Log("ATIVOU STAR BOOST");
         yield return new WaitForSeconds(interval);
-        collectables.isStarBoostActivated = false;
+        Debug.Log("DESATIVOU STAR BOOST");
+        isStarBoostActivated = false;
         isStarBoosting = false;
     }
 
@@ -378,15 +398,16 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("staminaHasBeenUsedCounter: " + staminaHasBeenUsedCounter);
         if (stamina < maxStamina && staminaHasBeenUsedCounter <= 0)
-            while (staminaHasBeenUsedCounter < 2f && stamina < maxStamina)
+        {
+            if (staminaHasBeenUsedCounter < 2f && stamina < maxStamina)
             {
                 stamina += Time.deltaTime; // fica aumentando a cada frame da unity em 0.0000... float dando 1 a cada seg
                 if (stamina >= maxStamina)
                 {
                     stamina = maxStamina;
-                    break;
                 }
             }
+        }
         else if (staminaHasBeenUsedCounter >= 0 && staminaHasBeenUsedCounter <= 2f) // não foi usada em 2 segundos
         {
             staminaHasBeenUsedCounter -= Time.deltaTime;
@@ -400,23 +421,23 @@ public class PlayerController : MonoBehaviour
     #region Input Methods
     public void OnAlpha1Press(InputAction.CallbackContext ctx)
     {
-        alpha1 = ctx.ReadValueAsButton();
+        alpha1 = !alpha1;//ctx.performed ? true : false;
     }
     public void OnAlpha2Press(InputAction.CallbackContext ctx)
     {
-        alpha2 = ctx.ReadValueAsButton();
+        alpha2 = !alpha2; //ctx.performed ? true : false;
     }
     public void OnAlpha3Press(InputAction.CallbackContext ctx)
     {
-        alpha3 = ctx.ReadValueAsButton();
+        alpha3 = !alpha3;//ctx.performed ? true : false;
     }
     public void OnAlpha4Press(InputAction.CallbackContext ctx)
     {
-        alpha4 = ctx.ReadValueAsButton();
+        alpha4 = !alpha4; //ctx.performed ? true : false;
     }
     public void OnAlpha5Press(InputAction.CallbackContext ctx)
     {
-        alpha5 = ctx.ReadValueAsButton();//ctx.ReadValueAsButton();
+        alpha5 = !alpha5; //ctx.performed ? true : false;
     }
     #endregion
 }

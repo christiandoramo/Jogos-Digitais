@@ -71,7 +71,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (colliderBullet != null && colliderBullet.gameObject.layer == LayerMask.NameToLayer("Bullet")) // colisão com bala
         {
-            int damage = 50; // Defina o dano da bala
+            int damage = 5; // Defina o dano da bala
             hp -= damage;
 
             // Verifica se o inimigo ainda está vivo

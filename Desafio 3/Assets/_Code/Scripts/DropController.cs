@@ -37,9 +37,6 @@ public class DropController : MonoBehaviour
         counter -= Time.deltaTime;
         if (counter <= 0)
         {
-            collectableManager.powerUpInstances = collectableManager.powerUpInstances
-            .Where(a => a.objInstance.transform.position.x != transform.position.x)
-            .ToList();
             if (cr != null)
             {
                 StopCoroutine(cr);
@@ -67,12 +64,13 @@ public class DropController : MonoBehaviour
 
         for (int i = 0; i < flashes; i++)
         {
-            spriteRenderer.color = new Color(255f, 255f, 255f, 24f);
+            spriteRenderer.color = new Color(255f, 255f, 255f, 5f);
             yield return new WaitForSeconds(interval / 2);
             spriteRenderer.color = originalColor;
             yield return new WaitForSeconds(interval / 2);
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collider)
     {

@@ -46,6 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7266bcdca2948d34e91ca012c56c8dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 75
+  continuousForceSpeedMeu: 0.05
+  moveSpeedMeu: 200
+  jumpForceMeu: 252.9
+  hitDamage: 5
+  dropProb: 50
   target: {fileID: 0}
   pc: {fileID: 0}
   activateDistance: 50
@@ -54,9 +60,6 @@ MonoBehaviour:
   jumpEnabled: 1
   directionLookEnabled: 1
   thisBody: {fileID: 7062735573199184200}
-  moveSpeedMeu: 200
-  jumpForceMeu: 200
-  speed: 350
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.8
   jumpModifier: 0.3
@@ -69,8 +72,6 @@ MonoBehaviour:
   bulletColliderMask:
     serializedVersion: 2
     m_Bits: 2048
-  hp: 100
-  dropProb: 100
   animator: {fileID: 7313129149623235259}
   customAnimator: {fileID: 3838023914834641641}
   spriteRenderer: {fileID: 3589800137826416743}

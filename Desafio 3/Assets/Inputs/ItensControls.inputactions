@@ -11,7 +11,7 @@
                     "id": "1d7b26e4-fbf9-4a54-86ab-5251f101323d",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -20,7 +20,7 @@
                     "id": "d22e30e9-2753-4b6f-aeee-76b2651d5309",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -29,7 +29,7 @@
                     "id": "ba890220-293f-4206-86d8-845625334c8a",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -38,7 +38,7 @@
                     "id": "fc964b38-d0cb-41cb-953c-a2461ddb8f97",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -47,7 +47,7 @@
                     "id": "b14e309d-7195-486a-9cab-2e269571d4b0",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -56,7 +56,7 @@
                     "name": "",
                     "id": "d9757460-1327-4f3e-b6e9-5daa7e6d045f",
                     "path": "<Keyboard>/1",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Use item 1",
@@ -67,7 +67,7 @@
                     "name": "",
                     "id": "64340283-ca33-40ad-b4e2-96a1e8c623b2",
                     "path": "<Keyboard>/2",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Use item 2",
@@ -78,7 +78,7 @@
                     "name": "",
                     "id": "5a8c3db5-ce6b-4cee-a660-b7e06fe18998",
                     "path": "<Keyboard>/3",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Use item 3",
@@ -89,7 +89,7 @@
                     "name": "",
                     "id": "8c2fe50a-6b3f-492c-927f-1a5a449e81fb",
                     "path": "<Keyboard>/4",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Use item 4",
@@ -100,7 +100,7 @@
                     "name": "",
                     "id": "d974de77-52c0-45ee-9855-57a38b38ab5b",
                     "path": "<Keyboard>/5",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Use item 5",
