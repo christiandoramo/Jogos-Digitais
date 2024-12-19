@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour
     //private bool isMoving = true;
     private bool isColliding = false;
     private bool isHitting = false;
-    private bool hasSpawnedDrop = false; // Garante que o drop só será spawnado uma vez.
+    private bool hasSpawnedDrop = false;
     [SerializeField][Range(1, 100)] int dropProb = 40;
 
     [Header("PathFinder")]
@@ -50,6 +50,7 @@ public class EnemyAI : MonoBehaviour
     public Animator animator;
     public CustomAnimator customAnimator;
     public SpriteRenderer spriteRenderer;
+    public GameObject zombieSoundPrefab;
 
     private Material material;      // Material associado ao SpriteRenderer
     private Shader defaultShader;  // Shader padrão do material
@@ -86,7 +87,6 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if (target == null || thisBody == null || hp <= 0) return;
         Collider2D colliderPlayer = Physics2D.OverlapBox(thisBody.transform.position, new Vector2(hitBoxSize.x, hitBoxSize.y), 0f, playerColliderMask);
         Collider2D colliderBullet = Physics2D.OverlapBox(thisBody.transform.position, new Vector2(hitBoxSize.x, hitBoxSize.y), 0f, bulletColliderMask);
@@ -147,9 +147,19 @@ public class EnemyAI : MonoBehaviour
         {
             hasSpawnedDrop = true;
             GameManager.instance.collectableManager.SpawnDrop(dropProb, thisBody.transform);
+            GameObject zombieSound = Instantiate(zombieSoundPrefab, target.transform.position, Quaternion.identity);
+            AudioSource audioSource = zombieSoundPrefab.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                // Destruir o som após a reprodução
+                Destroy(zombieSound, audioSource.clip.length);
+            }
         }
         customAnimator.ChangeState(AnimationStates.DYING);
         float duration = customAnimator.GetAnimationDuration(AnimationStates.DYING);
+
+
+
         Destroy(gameObject, duration + 1f);
     }
 

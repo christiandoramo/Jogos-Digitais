@@ -49,9 +49,9 @@ MonoBehaviour:
   hp: 75
   continuousForceSpeedMeu: 0.05
   moveSpeedMeu: 200
-  jumpForceMeu: 252.9
+  jumpForceMeu: 300
   hitDamage: 5
-  dropProb: 50
+  dropProb: 80
   target: {fileID: 0}
   pc: {fileID: 0}
   activateDistance: 50
@@ -75,6 +75,7 @@ MonoBehaviour:
   animator: {fileID: 7313129149623235259}
   customAnimator: {fileID: 3838023914834641641}
   spriteRenderer: {fileID: 3589800137826416743}
+  zombieSoundPrefab: {fileID: 3245384859138301148, guid: 60f24088e87d53d438385cb0a0a7f23e, type: 3}
 --- !u!114 &-4356489771158244202
 MonoBehaviour:
   m_ObjectHideFlags: 0

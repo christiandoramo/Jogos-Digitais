@@ -1,27 +1,19 @@
-![site do pacote com A* pathfinder](https://arongranberg.com/astar/documentation/4_2_17_c030646a/)
-
 # Desafio Individual Unity 3: Criando uma experiência de jogo
 
 ## Roadmap de Desenvolvimento
 
 ### Alta Prioridade (Essencial para o Desafio 3)
-- [ ] **Tela de Menu de Entrada.**
-- [ ] **Tela de Game Over com Animação.**
-- [ ] **Sistema de Pause com Menu.**
-- [ ] **IA Básica dos Inimigos (pathfinding para perseguição e movimentação em plataformas).**
-- [ ] **Plantação de Sementes em Locais Específicos.**
-- [ ] **Implementação de Frutos que Recuperam HP e Aumentam Dano.**
+- [x] **Tela de Menu de Entrada.**
+- [x] **Tela de Game Over com Animação.**
+- [x] **Sistema de Pause com Menu.**
+- [x] **IA Básica dos Inimigos (pathfinding para perseguição e movimentação em plataformas).**
+- [x] **Plantação de Sementes em Locais Específicos.**
+- [x] **Implementação de Frutos que Recuperam HP e Aumentam Dano.**
 
 ### Média Prioridade (Importante para o Desafio 3, mas pode ser simplificado)
 - [ ] **Cutscene Inicial.**
-- [ ] **Waves de Zumbis e Drop de Caixas de Munição.**
-- [ ] **Drops Especiais (começar com 1 ou 2 itens, como "Modo Espectro").**
-- [ ] **Sistema Básico de Ciclo Dia e Noite.**
-### Baixa Prioridade (Menos Importante para o Desafio 3)
-- [ ] **Zumbis Gigantes com Drops Especiais.**
-- [ ] **Frutos com Efeitos Secundários (ex.: aumentar pulo, criar torretas).**
-- [ ] **Sprites e Sons Temáticos (ex.: som do Metal Slug para o Modo Laser).**
-- [ ] **Animações Avançadas no Ciclo de Dia e Noite.**
+- [x] **Waves de Zumbis e Drop.**
+- [x] **Sistema Básico de Ciclo Dia e Noite.**
 
 <div  align="center">
 

@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public float acceleration = 3f;
 
     public GameObject bulletPrefab;
+    public GameObject shootSoundPrefab;
     public float shootCooldown = 0.3f;
     public float armedAnimationCooldown = 5f;
 
@@ -85,6 +86,12 @@ public class PlayerController : MonoBehaviour
     private bool alpha3;
     private bool alpha4;
     private bool alpha5;
+    private bool alpha1Toggled = false;
+    private bool alpha2Toggled = false;
+    private bool alpha3Toggled = false;
+    private bool alpha4Toggled = false;
+    private bool alpha5Toggled = false;
+
 
 
 
@@ -168,13 +175,11 @@ public class PlayerController : MonoBehaviour
 
     void ItemUse()
     {
-        if (!(alpha1 || alpha2 || alpha3 || alpha4 || alpha5)) return; // se não der nenhum OR é false logo Not false é true e retorna
-
-        if (alpha1) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.SEED);
-        else if (alpha2) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.HPREGEN);
-        else if (alpha3) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.STAR);
-        else if (alpha4) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.JUMP);
-        else if (alpha5) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.DMG);
+        if (Input.GetKeyDown(KeyCode.Alpha1)) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.SEED);
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.HPREGEN);
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.STAR);
+        else if (Input.GetKeyDown(KeyCode.Alpha4)) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.JUMP);
+        else if (Input.GetKeyDown(KeyCode.Alpha5)) GameManager.instance.collectableManager.UseCollectable(playerFeet.groundTransform, CollectableType.DMG);
     }
     void Animate(bool isMoving)
     {
@@ -268,7 +273,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce + 100f);
+                superJump = false;
+                rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce + 15f);
             }
         }
     }
@@ -280,12 +286,21 @@ public class PlayerController : MonoBehaviour
 
         if (shootCooldownTimer <= 0 && isShootPressed)
         {
-            //Vector3 pos = player.transform.position;
-            //if (!spriteRenderer.flipX) pos.x *= 1.02f;
-            //else pos.x *= 0.98f;
 
             GameObject bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
+
+
+
             if (bullet != null) bullet.GetComponent<Bullet>().SetPlayerTransform(player);
+
+            GameObject shotSound = Instantiate(shootSoundPrefab, player.transform.position, Quaternion.identity);
+            AudioSource audioSource = shotSound.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                // Destruir o som após a reprodução
+                Destroy(shotSound, audioSource.clip.length);
+            }
+
             shootCooldownTimer = shootCooldown;
             armedAnimationCooldownTimer = armedAnimationCooldown;
             isArmed = true;
@@ -417,27 +432,81 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // nova input da unity
-    #region Input Methods
-    public void OnAlpha1Press(InputAction.CallbackContext ctx)
-    {
-        alpha1 = !alpha1;//ctx.performed ? true : false;
-    }
-    public void OnAlpha2Press(InputAction.CallbackContext ctx)
-    {
-        alpha2 = !alpha2; //ctx.performed ? true : false;
-    }
-    public void OnAlpha3Press(InputAction.CallbackContext ctx)
-    {
-        alpha3 = !alpha3;//ctx.performed ? true : false;
-    }
-    public void OnAlpha4Press(InputAction.CallbackContext ctx)
-    {
-        alpha4 = !alpha4; //ctx.performed ? true : false;
-    }
-    public void OnAlpha5Press(InputAction.CallbackContext ctx)
-    {
-        alpha5 = !alpha5; //ctx.performed ? true : false;
-    }
-    #endregion
+    //// nova input da unity
+    //#region Input Methods
+    //public void OnAlpha1Press(InputAction.CallbackContext ctx)
+    //{
+    //    if (ctx.started && !alpha1Toggled)
+    //    {
+    //        alpha1 = !alpha1;
+    //        alpha1Toggled = true;
+    //    }
+    //    else if (!(ctx.started && !alpha1Toggled))
+    //    {
+    //        alpha1Toggled = false;
+    //        alpha1 = false;
+    //    }
+    //    if (ctx.canceled) // Reseta o estado
+    //    {
+    //        alpha1Toggled = false;
+    //    }
+    //    Debug.Log("alpha1: " + alpha1);
+    //}
+    //public void OnAlpha2Press(InputAction.CallbackContext ctx)
+    //{
+    //    if (ctx.started && !alpha2Toggled)
+    //    {
+    //        Debug.Log("-2-");
+
+    //        alpha2 = !alpha2;
+    //        alpha2Toggled = true;
+    //    }
+    //    else if (ctx.canceled) // Reseta o estado
+    //    {
+    //        alpha2Toggled = false;
+    //    }
+    //}
+    //public void OnAlpha3Press(InputAction.CallbackContext ctx)
+    //{
+    //    if (ctx.started && !alpha3Toggled)
+    //    {
+    //        Debug.Log("-3-");
+
+    //        alpha3 = !alpha3;
+    //        alpha3Toggled = true;
+    //    }
+    //    else if (ctx.canceled) // Reseta o estado
+    //    {
+    //        alpha3Toggled = false;
+    //    }
+    //}
+    //public void OnAlpha4Press(InputAction.CallbackContext ctx)
+    //{
+    //    if (ctx.started && !alpha4Toggled)
+    //    {
+    //        Debug.Log("-4-");
+
+    //        alpha4 = !alpha4;
+    //        alpha4Toggled = true;
+    //    }
+    //    else if (ctx.canceled) // Reseta o estado
+    //    {
+    //        alpha4Toggled = false;
+    //    }
+    //}
+    //public void OnAlpha5Press(InputAction.CallbackContext ctx)
+    //{
+    //    if (ctx.started && !alpha5Toggled)
+    //    {
+    //        Debug.Log("-5-");
+
+    //        alpha5 = !alpha5;
+    //        alpha5Toggled = true;
+    //    }
+    //    else if (ctx.canceled) // Reseta o estado
+    //    {
+    //        alpha5Toggled = false;
+    //    }
+    //}
+    //#endregion
 }

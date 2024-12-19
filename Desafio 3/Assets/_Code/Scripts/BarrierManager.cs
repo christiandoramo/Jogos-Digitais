@@ -5,7 +5,7 @@ public class BarrierManager : MonoBehaviour
 {
     [SerializeField] float distanceToRunByWave = 20f;
     public bool waveHasChanged;
-    int i = 0;
+    float i = 0;
 
     // Update is called once per frame
     void Update()
@@ -17,9 +17,10 @@ public class BarrierManager : MonoBehaviour
     {
         if (waveHasChanged)
         {
-            transform.position += (Vector3.up);
-            i++;
-            if (i == distanceToRunByWave)
+            i += Time.deltaTime;
+            transform.position += (Vector3.up * i);
+
+            if (i >= distanceToRunByWave)
             {
                 i = 0;
                 waveHasChanged = false;

@@ -22,9 +22,9 @@ MonoBehaviour:
   - {fileID: 6101870128997067697, guid: 0e4a5eab2eb9f2546badadb83f5cee11, type: 3}
   - {fileID: -2819159017363735665, guid: bf07103d4c1934641932f7b6aeec41d5, type: 3}
   - {fileID: -2043081902604294830, guid: e745cf87093822143b32f48f519bc2fc, type: 3}
-  jumpAugment: 0.195
+  jumpAugment: 0.2
   bulletDmgAugment: 0.501
-  hpRegenAugment: 40
+  hpRegenAugment: 50
   seedPrefab: {fileID: 5956267586591150380, guid: 23da50328ae89c94e8080fe1b51e5547, type: 3}
   starPrefab: {fileID: 5956267586591150380, guid: bf4d587b0c6a6a141b5050d1ba864b67, type: 3}
   plantPrefab: {fileID: 5956267586591150380, guid: 24cf874bd6c737b4f9c04b73e7876816, type: 3}
