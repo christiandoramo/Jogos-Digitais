@@ -1,11 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 
 [CreateAssetMenu(fileName = "WaveManager", menuName = "ScriptableObjects/WaveManager", order = 1)]
 public class WaveManager : ScriptableObject

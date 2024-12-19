@@ -415,11 +415,12 @@ namespace Pathfinding {
 			lastDeltaTime = 0;
 		}
 
-		/// <summary>
-		/// Called every frame.
-		/// If no rigidbodies are used then all movement happens here.
-		/// </summary>
-		protected virtual void Update () {
+        /// <summary>
+        /// Called every frame.
+        /// If no rigidbodies are used then all movement happens here.
+        /// </summary>
+        [System.Obsolete]
+        protected virtual void Update () {
 			if (shouldRecalculatePath) SearchPath();
 
 			// If gravity is used depends on a lot of things.

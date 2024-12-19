@@ -303,11 +303,6 @@ public class CollectableManager : ScriptableObject
 
     public void Collect(CollectableType type) // utilizável direto do inventário ou coletável usável
     {
-        Debug.Log("Coletou: " + type.HumanName());
-        Debug.Log("pc: " + pc.ToString());
-        Debug.Log("pc.collectables: " + pc.collectables.ToString());
-        Debug.Log("pc.collectables.seeds: " + pc.collectables.seeds.ToString());
-
         switch (type)
         {
             case CollectableType.SEED:

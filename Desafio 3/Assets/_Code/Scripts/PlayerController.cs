@@ -1,12 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 using static CollectableManager;
 
 public class PlayerController : MonoBehaviour
@@ -80,19 +74,6 @@ public class PlayerController : MonoBehaviour
     private bool isRunning;
     // private bool isIdling;
     private bool isStarBoosting;
-
-    private bool alpha1;
-    private bool alpha2;
-    private bool alpha3;
-    private bool alpha4;
-    private bool alpha5;
-    private bool alpha1Toggled = false;
-    private bool alpha2Toggled = false;
-    private bool alpha3Toggled = false;
-    private bool alpha4Toggled = false;
-    private bool alpha5Toggled = false;
-
-
 
 
     private Material armsMaterial;
@@ -430,83 +411,4 @@ public class PlayerController : MonoBehaviour
                 staminaHasBeenUsedCounter = 0f;
         }
     }
-
-
-    //// nova input da unity
-    //#region Input Methods
-    //public void OnAlpha1Press(InputAction.CallbackContext ctx)
-    //{
-    //    if (ctx.started && !alpha1Toggled)
-    //    {
-    //        alpha1 = !alpha1;
-    //        alpha1Toggled = true;
-    //    }
-    //    else if (!(ctx.started && !alpha1Toggled))
-    //    {
-    //        alpha1Toggled = false;
-    //        alpha1 = false;
-    //    }
-    //    if (ctx.canceled) // Reseta o estado
-    //    {
-    //        alpha1Toggled = false;
-    //    }
-    //    Debug.Log("alpha1: " + alpha1);
-    //}
-    //public void OnAlpha2Press(InputAction.CallbackContext ctx)
-    //{
-    //    if (ctx.started && !alpha2Toggled)
-    //    {
-    //        Debug.Log("-2-");
-
-    //        alpha2 = !alpha2;
-    //        alpha2Toggled = true;
-    //    }
-    //    else if (ctx.canceled) // Reseta o estado
-    //    {
-    //        alpha2Toggled = false;
-    //    }
-    //}
-    //public void OnAlpha3Press(InputAction.CallbackContext ctx)
-    //{
-    //    if (ctx.started && !alpha3Toggled)
-    //    {
-    //        Debug.Log("-3-");
-
-    //        alpha3 = !alpha3;
-    //        alpha3Toggled = true;
-    //    }
-    //    else if (ctx.canceled) // Reseta o estado
-    //    {
-    //        alpha3Toggled = false;
-    //    }
-    //}
-    //public void OnAlpha4Press(InputAction.CallbackContext ctx)
-    //{
-    //    if (ctx.started && !alpha4Toggled)
-    //    {
-    //        Debug.Log("-4-");
-
-    //        alpha4 = !alpha4;
-    //        alpha4Toggled = true;
-    //    }
-    //    else if (ctx.canceled) // Reseta o estado
-    //    {
-    //        alpha4Toggled = false;
-    //    }
-    //}
-    //public void OnAlpha5Press(InputAction.CallbackContext ctx)
-    //{
-    //    if (ctx.started && !alpha5Toggled)
-    //    {
-    //        Debug.Log("-5-");
-
-    //        alpha5 = !alpha5;
-    //        alpha5Toggled = true;
-    //    }
-    //    else if (ctx.canceled) // Reseta o estado
-    //    {
-    //        alpha5Toggled = false;
-    //    }
-    //}
-    //#endregion
 }
